@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baifrncoxy4tw"
-path="res://.godot/imported/RedPandaRun.png-5f0ebcc4970f854656b6ae10c79cd34e.ctex"
+uid="uid://d0sl0qb73ppg2"
+path="res://.godot/imported/RedPanda.png-bf7e3028dde1600e5b791d0b5d178278.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/RedPandaRun.png"
-dest_files=["res://.godot/imported/RedPandaRun.png-5f0ebcc4970f854656b6ae10c79cd34e.ctex"]
+source_file="res://assets/RedPanda.png"
+dest_files=["res://.godot/imported/RedPanda.png-bf7e3028dde1600e5b791d0b5d178278.ctex"]
 
 [params]
 

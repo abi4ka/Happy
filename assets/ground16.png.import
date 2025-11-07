@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqgmwy42syhi1"
-path="res://.godot/imported/RedPandaIdle.png-dbfed9942e8dea5a7fdde5d945c6abcb.ctex"
+uid="uid://dawqg3q4lq8me"
+path="res://.godot/imported/ground16.png-33aebafe46b26b9cfd8b96a63a7c8fc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/RedPandaIdle.png"
-dest_files=["res://.godot/imported/RedPandaIdle.png-dbfed9942e8dea5a7fdde5d945c6abcb.ctex"]
+source_file="res://assets/ground16.png"
+dest_files=["res://.godot/imported/ground16.png-33aebafe46b26b9cfd8b96a63a7c8fc7.ctex"]
 
 [params]
 
