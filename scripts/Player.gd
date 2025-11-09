@@ -12,7 +12,7 @@ var collected_items: int = 0
 @onready var anim = $AnimatedSprite2D
 
 func _ready():
-	add_to_group("players")
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

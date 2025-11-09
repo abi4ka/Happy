@@ -1,11 +1,10 @@
-[gd_scene load_steps=53 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=44 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="Script" uid="uid://bhlyf5gyepo1g" path="res://scripts/Player.gd" id="2_mlbie"]
 [ext_resource type="Texture2D" uid="uid://d0sl0qb73ppg2" path="res://assets/RedPanda.png" id="3_lmyl5"]
 [ext_resource type="Texture2D" uid="uid://bktxy453by217" path="res://assets/RedPanda2.png" id="5_mlbie"]
-[ext_resource type="Script" uid="uid://oqlk2a5pwwqo" path="res://scripts/Collectible.gd" id="7_5py54"]
-[ext_resource type="Texture2D" uid="uid://bomucl4gqreiq" path="res://assets/coin.png" id="7_mlbie"]
+[ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://button.tscn" id="7_mlbie"]
 [ext_resource type="Texture2D" uid="uid://dawqg3q4lq8me" path="res://assets/ground16.png" id="7_s3sxq"]
 [ext_resource type="PackedScene" uid="uid://mgbumprcwhpt" path="res://coin.tscn" id="8_s3sxq"]
 
@@ -258,59 +257,6 @@ texture = ExtResource("7_s3sxq")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5py54")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlbie"]
-size = Vector2(16, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3brhk"]
-atlas = ExtResource("7_mlbie")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7qte5"]
-atlas = ExtResource("7_mlbie")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ased"]
-atlas = ExtResource("7_mlbie")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vnlif"]
-atlas = ExtResource("7_mlbie")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5wncp"]
-atlas = ExtResource("7_mlbie")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_li71q"]
-atlas = ExtResource("7_mlbie")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7ov7e"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3brhk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7qte5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6ased")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vnlif")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5wncp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_li71q")
-}],
-"loop": true,
-"name": &"default",
-"speed": 9.0
-}]
-
 [node name="Level1" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
@@ -372,23 +318,14 @@ sprite_frames = SubResource("SpriteFrames_0lcl8")
 animation = &"idle"
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = 5
 texture_filter = 1
 tile_set = SubResource("TileSet_1bjei")
 format = 2
 layer_0/tile_data = PackedInt32Array(262139, 65536, 0, 262140, 131072, 0, 262141, 65536, 0, 262142, 131072, 0, 262143, 131072, 0, 196608, 65536, 0, 196609, 65536, 0, 196610, 131072, 0, 196611, 65536, 0, 196612, 131072, 0, 196617, 196608, 0, 262136, 0, 0, 262138, 65536, 0, 262137, 131072, 0, 196616, 131072, 0, 196615, 131072, 0, 196614, 65536, 0, 196613, 131072, 0, 65541, 0, 0, 65542, 65536, 0, 65543, 131072, 0, 65544, 196608, 0, -65533, 196608, 0, -65534, 131072, 0, -65535, 131072, 0, -65536, 0, 0, -3, 196608, 0, -4, 131072, 0, -5, 65536, 0, -7, 0, 0, -6, 65536, 0)
 
-[node name="Collectible" type="Area2D" parent="."]
-position = Vector2(32, -24)
-scale = Vector2(0.7, 0.7)
-script = ExtResource("7_5py54")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectible"]
-position = Vector2(0, -0.9999999)
-scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("RectangleShape2D_mlbie")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Collectible"]
-sprite_frames = SubResource("SpriteFrames_7ov7e")
-
 [node name="Coin" parent="." instance=ExtResource("8_s3sxq")]
-position = Vector2(-10, 26)
+position = Vector2(33, -27)
+
+[node name="Button" parent="." instance=ExtResource("7_mlbie")]
+position = Vector2(-36, 51)
