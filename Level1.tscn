@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=15 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_1bjei"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://mgbumprcwhpt" path="res://coin.tscn" id="8_s3sxq"]
 [ext_resource type="Texture2D" uid="uid://dsx5eiwa511k6" path="res://assets/background_0.png" id="9_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://b5o2vin6h2sv2" path="res://assets/background_1.png" id="10_aiv1b"]
+[ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://platform.tscn" id="11_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://bcalrpdpas0jk" path="res://assets/background_2.png" id="11_wapi5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5py54"]
@@ -201,9 +202,11 @@ sources/3 = SubResource("TileSetAtlasSource_aiv1b")
 
 [node name="Level1" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
 zoom = Vector2(5, 5)
 script = ExtResource("1_dn5ey")
+player1 = NodePath("../Player1")
+player2 = NodePath("../Player2")
 auto_min_zoom = 5.0
 auto_max_zoom = 3.0
 zoom_distance = 200.0
@@ -211,15 +214,11 @@ manual_min_zoom = 2.0
 manual_max_zoom = 7.0
 zoom_step = 0.3
 
-[node name="players" type="Node" parent="."]
+[node name="Player1" parent="." instance=ExtResource("2_1bjei")]
+position = Vector2(-64, 58)
 
-[node name="Player1" parent="players" instance=ExtResource("2_1bjei")]
-position = Vector2(-64, 25)
-interact_action = "push_p1"
-
-[node name="Player2" parent="players" instance=ExtResource("3_5g1s2")]
-position = Vector2(55, 25)
-interact_action = "push_p2"
+[node name="Player2" parent="." instance=ExtResource("3_5g1s2")]
+position = Vector2(55, 58)
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 5
@@ -261,3 +260,10 @@ texture_repeat = 3
 texture = ExtResource("11_wapi5")
 region_enabled = true
 region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="Platform" parent="." instance=ExtResource("11_5g1s2")]
+position = Vector2(-162, 47)
+move_distance = 20.0
+
+[connection signal="pressed" from="Button" to="Platform" method="lower"]
+[connection signal="released" from="Button" to="Platform" method="raise"]
