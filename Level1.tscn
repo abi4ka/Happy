@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=17 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_1bjei"]
+[ext_resource type="Script" uid="uid://co3c5qnlligg1" path="res://scripts/Timer.gd" id="2_aiv1b"]
 [ext_resource type="PackedScene" uid="uid://b73nevepusppb" path="res://player_2.tscn" id="3_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://b86ummp180mvc" path="res://assets/tileSetMy.png" id="6_5g1s2"]
 [ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://button.tscn" id="7_mlbie"]
@@ -11,20 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b5o2vin6h2sv2" path="res://assets/background_1.png" id="10_aiv1b"]
 [ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://platform.tscn" id="11_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://bcalrpdpas0jk" path="res://assets/background_2.png" id="11_wapi5"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5g1s2"]
-load_path = "res://.godot/imported/ground16.png-33aebafe46b26b9cfd8b96a63a7c8fc7.ctex"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5py54"]
-texture = SubResource("CompressedTexture2D_5g1s2")
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5, 8, -5, 8, 8, 8, 7, -8, 7)
-1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -5, -8, -5, -8, 6, 8, 6)
-2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -5, -8, -5, -8, 6, 8, 6)
-3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5, 8, -5, 8, 8, 8, 7, -8, 7)
+[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="12_wapi5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiv1b"]
 texture = ExtResource("6_5g1s2")
@@ -200,10 +188,16 @@ texture = ExtResource("6_5g1s2")
 
 [sub_resource type="TileSet" id="TileSet_1bjei"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_5py54")
 sources/3 = SubResource("TileSetAtlasSource_aiv1b")
 
+[sub_resource type="LabelSettings" id="LabelSettings_aiv1b"]
+font = ExtResource("12_wapi5")
+font_size = 54
+
 [node name="Level1" type="Node2D"]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
 zoom = Vector2(5, 5)
@@ -275,6 +269,22 @@ speed = 10.0
 [node name="Platform" parent="." instance=ExtResource("11_5g1s2")]
 position = Vector2(-162, 47)
 move_distance = 20.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("timer_node")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = 20.0
+offset_right = 67.50037
+offset_bottom = 75.0
+grow_horizontal = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_aiv1b")
+script = ExtResource("2_aiv1b")
+timer_node = NodePath("../../Timer")
 
 [connection signal="pressed" from="Button" to="Platform" method="lower"]
 [connection signal="released" from="Button" to="Platform" method="raise"]
