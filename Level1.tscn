@@ -215,9 +215,11 @@ zoom_step = 0.3
 
 [node name="Player1" parent="players" instance=ExtResource("2_1bjei")]
 position = Vector2(-64, 25)
+interact_action = "push_p1"
 
 [node name="Player2" parent="players" instance=ExtResource("3_5g1s2")]
 position = Vector2(55, 25)
+interact_action = "push_p2"
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 5

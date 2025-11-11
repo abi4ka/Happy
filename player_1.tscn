@@ -140,7 +140,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_txlgs")
 }],
-"loop": true,
+"loop": false,
 "name": &"push",
 "speed": 9.0
 }, {
@@ -181,6 +181,7 @@ script = ExtResource("1_bxx23")
 move_left_action = "move_left_p1"
 move_right_action = "move_right_p1"
 jump_action = "jump_p1"
+interact_action = "push_p1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
