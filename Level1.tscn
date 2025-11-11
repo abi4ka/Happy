@@ -208,11 +208,12 @@ script = ExtResource("1_dn5ey")
 player1 = NodePath("../Player1")
 player2 = NodePath("../Player2")
 auto_min_zoom = 5.0
-auto_max_zoom = 3.0
+auto_max_zoom = 4.0
 zoom_distance = 200.0
 manual_min_zoom = 2.0
 manual_max_zoom = 7.0
 zoom_step = 0.3
+vertical_offset = 45.0
 
 [node name="Player1" parent="." instance=ExtResource("2_1bjei")]
 position = Vector2(-64, 58)
