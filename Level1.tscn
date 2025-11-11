@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://b73nevepusppb" path="res://player_2.tscn" id="3_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://b86ummp180mvc" path="res://assets/tileSetMy.png" id="6_5g1s2"]
 [ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://button.tscn" id="7_mlbie"]
-[ext_resource type="Texture2D" uid="uid://dawqg3q4lq8me" path="res://assets/ground16.png" id="7_s3sxq"]
 [ext_resource type="PackedScene" uid="uid://mgbumprcwhpt" path="res://coin.tscn" id="8_s3sxq"]
 [ext_resource type="Texture2D" uid="uid://dsx5eiwa511k6" path="res://assets/background_0.png" id="9_5g1s2"]
 [ext_resource type="Script" uid="uid://e0j26ngnq84m" path="res://scripts/clouds.gd" id="9_aiv1b"]
@@ -13,8 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://platform.tscn" id="11_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://bcalrpdpas0jk" path="res://assets/background_2.png" id="11_wapi5"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5g1s2"]
+load_path = "res://.godot/imported/ground16.png-33aebafe46b26b9cfd8b96a63a7c8fc7.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5py54"]
-texture = ExtResource("7_s3sxq")
+texture = SubResource("CompressedTexture2D_5g1s2")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5, 8, -5, 8, 8, 8, 7, -8, 7)
 1:0/0 = 0
