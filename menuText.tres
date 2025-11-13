@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bsk47r4n4k72r"]
+
+[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="1_l741s"]
+
+[resource]
+font = ExtResource("1_l741s")
+font_size = 32
