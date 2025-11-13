@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://xynq5he18fh6"]
+[gd_scene load_steps=7 format=3 uid="uid://xynq5he18fh6"]
 
 [ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://c7qn3aaspc7mp" path="res://scripts/MenuControl.gd" id="1_mae5d"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="1_ouk20"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ouk20"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mae5d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hy44"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -12,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mae5d")
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -81,3 +87,122 @@ vertical_alignment = 2
 layout_mode = 2
 text = "Сreated by abik"
 label_settings = ExtResource("1_lti8b")
+
+[node name="LevelsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelsPanel"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="LevelsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 64
+text = "1 lvl"
+
+[node name="Button2" type="Button" parent="LevelsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 64
+text = "2 lvl"
+
+[node name="Button3" type="Button" parent="LevelsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 64
+text = "3 lvl"
+
+[node name="Button4" type="Button" parent="LevelsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 64
+text = "4 lvl"
+
+[node name="Panel" type="Panel" parent="LevelsPanel"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="LevelsPanel/Panel"]
+layout_mode = 0
+offset_top = -64.0
+offset_right = 150.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
+text = "Back"
+
+[node name="StatsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
+
+[node name="Panel" type="Panel" parent="StatsPanel"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="StatsPanel/Panel"]
+layout_mode = 0
+offset_top = -64.0
+offset_right = 150.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
+text = "Back"
+
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
+
+[node name="Panel" type="Panel" parent="SettingsPanel"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="SettingsPanel/Panel"]
+layout_mode = 0
+offset_top = -64.0
+offset_right = 150.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
+text = "Back"
