@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://xynq5he18fh6"]
+[gd_scene load_steps=8 format=3 uid="uid://xynq5he18fh6"]
 
 [ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="1_lti8b"]
 [ext_resource type="Script" uid="uid://c7qn3aaspc7mp" path="res://scripts/MenuControl.gd" id="1_mae5d"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="1_ouk20"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytr4m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ouk20"]
 
@@ -20,6 +22,53 @@ grow_vertical = 2
 script = ExtResource("1_mae5d")
 
 [node name="Background" type="Node2D" parent="."]
+
+[node name="UserNamePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = 10.0
+offset_right = -15.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ytr4m")
+
+[node name="UserNameLabel" type="Label" parent="UserNamePanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "PlayerName"
+label_settings = ExtResource("1_lti8b")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InfoPanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -73.0
+offset_right = 245.0
+offset_bottom = -5.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VersionLabel" type="Label" parent="InfoPanel"]
+layout_mode = 2
+text = "Version 0.1"
+label_settings = ExtResource("1_lti8b")
+vertical_alignment = 2
+
+[node name="CreatorLabel" type="Label" parent="InfoPanel"]
+layout_mode = 2
+text = "Сreated by abik"
+label_settings = ExtResource("1_lti8b")
 
 [node name="MainPanel" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -63,30 +112,6 @@ theme_override_fonts/font = ExtResource("1_ouk20")
 theme_override_font_sizes/font_size = 86
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 text = "Exit"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = -73.0
-offset_right = 245.0
-offset_bottom = -5.0
-grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="VersionLabel" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Version 0.1"
-label_settings = ExtResource("1_lti8b")
-vertical_alignment = 2
-
-[node name="CreatorLabel" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Сreated by abik"
-label_settings = ExtResource("1_lti8b")
 
 [node name="LevelsPanel" type="PanelContainer" parent="."]
 visible = false
@@ -148,7 +173,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
 [node name="StatsPanel" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

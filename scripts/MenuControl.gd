@@ -1,14 +1,26 @@
 extends Control
 
-@onready var main_panel = $MainPanel
-@onready var levels_panel = $LevelsPanel
-@onready var stats_panel = $StatsPanel
+@onready var main_panel     = $MainPanel
+@onready var levels_panel   = $LevelsPanel
+@onready var stats_panel    = $StatsPanel
 @onready var settings_panel = $SettingsPanel
+@onready var name_label     = $UserNamePanel/UserNameLabel
+
+# Сюда добавляй все панели, которые должны переключаться кнопками
+var toggle_panels: Array[Control]
 
 func _ready():
-	# В начале показываем только главное меню
+	# Инициализация списка переключаемых панелей
+	toggle_panels = [
+		main_panel,
+		levels_panel,
+		stats_panel,
+		settings_panel
+	]
+
+	# В начале показываем только главное меню (и скрываем остальные toggle-панели)
 	_show_only(main_panel)
-	
+
 	# Подключаем сигналы
 	$MainPanel/PlayButton.pressed.connect(_on_play_pressed)
 	$MainPanel/StatsButton.pressed.connect(_on_stats_pressed)
@@ -19,16 +31,19 @@ func _ready():
 	$StatsPanel/Panel/BackButton.pressed.connect(_on_back_pressed)
 	$SettingsPanel/Panel/BackButton.pressed.connect(_on_back_pressed)
 
+	# Отображаем имя (или id) пользователя
+	name_label.text = PlayerData.player_name  # или PlayerData.player_id если надо id
+
 func _input(event):
 	if event.is_action_pressed("ui_cancel"): # Esc по умолчанию
 		_show_only(main_panel)
 
-func _show_only(panel: Control):
-	for child in get_children():
-		if child is Control and child != panel and not child.name.ends_with("Label"):
-			child.visible = false
-	panel.visible = true
+# Скрываем все панели из toggle_panels кроме переданной
+func _show_only(panel: Control) -> void:
+	for p in toggle_panels:
+		p.visible = (p == panel)
 
+# Обработчики кнопок
 func _on_play_pressed():
 	_show_only(levels_panel)
 
