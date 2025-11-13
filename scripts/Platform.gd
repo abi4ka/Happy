@@ -6,6 +6,7 @@ extends Node2D
 
 var start_pos: Vector2
 var target_pos: Vector2
+var direction: Vector2 = Vector2.ZERO
 
 func _ready():
 	start_pos = position
@@ -13,12 +14,17 @@ func _ready():
 
 func lower():
 	if horizontal_move:
-		target_pos.x = start_pos.x + move_distance
+		target_pos = start_pos + Vector2(move_distance, 0)
 	else:
-		target_pos.y = start_pos.y + move_distance
+		target_pos = start_pos + Vector2(0, move_distance)
+	direction = (target_pos - position).normalized()
 
 func raise():
 	target_pos = start_pos
+	direction = (target_pos - position).normalized()
 
 func _process(delta):
-	position = position.lerp(target_pos, delta * move_speed)
+	if position.distance_to(target_pos) > move_speed * delta:
+		position += direction * move_speed * delta
+	else:
+		position = target_pos
