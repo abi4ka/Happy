@@ -238,6 +238,10 @@ position = Vector2(33, -27)
 [node name="Button" parent="." instance=ExtResource("7_mlbie")]
 z_index = 1
 
+[node name="Button2" parent="." instance=ExtResource("7_mlbie")]
+z_index = 1
+position = Vector2(-193, 16)
+
 [node name="Background" type="Node2D" parent="."]
 z_index = -50
 position = Vector2(0, 74)
@@ -287,5 +291,7 @@ label_settings = SubResource("LabelSettings_aiv1b")
 script = ExtResource("2_aiv1b")
 timer_node = NodePath("../../Timer")
 
-[connection signal="pressed" from="Button" to="Platform" method="lower"]
-[connection signal="released" from="Button" to="Platform" method="raise"]
+[connection signal="pressed" from="Button" to="Platform" method="button_pressed"]
+[connection signal="released" from="Button" to="Platform" method="button_released"]
+[connection signal="pressed" from="Button2" to="Platform" method="button_pressed"]
+[connection signal="released" from="Button2" to="Platform" method="button_released"]

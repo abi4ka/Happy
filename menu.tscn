@@ -210,6 +210,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
 [node name="SettingsPanel" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

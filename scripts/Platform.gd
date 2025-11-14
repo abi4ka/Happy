@@ -8,9 +8,25 @@ var start_pos: Vector2
 var target_pos: Vector2
 var direction: Vector2 = Vector2.ZERO
 
+var hold_count: int = 0
+
 func _ready():
 	start_pos = position
 	target_pos = start_pos
+
+func button_pressed():
+	hold_count += 1
+	update_target()
+
+func button_released():
+	hold_count = max(hold_count - 1, 0)
+	update_target()
+
+func update_target():
+	if hold_count > 0:
+		lower()
+	else:
+		raise()
 
 func lower():
 	if horizontal_move:
