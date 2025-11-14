@@ -6,6 +6,7 @@ extends Control
 @onready var settings_panel = $SettingsPanel
 @onready var name_label     = $UserNamePanel/UserNameLabel
 
+@onready var name_input = $SettingsPanel/VBoxContainer/HBoxContainer/NameInput
 # Сюда добавляй все панели, которые должны переключаться кнопками
 var toggle_panels: Array[Control]
 
@@ -30,6 +31,7 @@ func _ready():
 	$LevelsPanel/Panel/BackButton.pressed.connect(_on_back_pressed)
 	$StatsPanel/Panel/BackButton.pressed.connect(_on_back_pressed)
 	$SettingsPanel/Panel/BackButton.pressed.connect(_on_back_pressed)
+	$SettingsPanel/VBoxContainer/HBoxContainer/Apply.pressed.connect(_on_apply_name_pressed)
 
 	# Отображаем имя (или id) пользователя
 	name_label.text = PlayerData.player_name  # или PlayerData.player_id если надо id
@@ -58,3 +60,17 @@ func _on_exit_pressed():
 
 func _on_back_pressed():
 	_show_only(main_panel)
+
+func _on_apply_name_pressed():
+	var new_name = name_input.text.strip_edges()
+
+	if new_name.is_empty():
+		print("Имя пустое! Не меняем.")
+		return
+
+	PlayerData.player_name = new_name
+	PlayerData.save_data()
+
+	name_label.text = new_name
+
+	print("Имя успешно изменено на:", new_name)

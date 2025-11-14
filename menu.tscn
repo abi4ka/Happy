@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://xynq5he18fh6"]
+[gd_scene load_steps=10 format=3 uid="uid://xynq5he18fh6"]
 
 [ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="1_lti8b"]
 [ext_resource type="Script" uid="uid://c7qn3aaspc7mp" path="res://scripts/MenuControl.gd" id="1_mae5d"]
@@ -11,6 +11,12 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mae5d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hy44"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mae5d"]
+font = ExtResource("1_ouk20")
+font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l48gv"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -71,6 +77,7 @@ text = "Сreated by abik"
 label_settings = ExtResource("1_lti8b")
 
 [node name="MainPanel" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -173,6 +180,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
 [node name="StatsPanel" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -202,7 +210,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
 [node name="SettingsPanel" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -214,6 +221,32 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="SettingsPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Player name: "
+label_settings = SubResource("LabelSettings_mae5d")
+
+[node name="NameInput" type="LineEdit" parent="SettingsPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 36
+placeholder_text = "God of  this world 666"
+
+[node name="Apply" type="Button" parent="SettingsPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ouk20")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
+text = "Apply"
 
 [node name="Panel" type="Panel" parent="SettingsPanel"]
 layout_mode = 2
