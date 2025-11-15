@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=22 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_1bjei"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://platformR.tscn" id="12_3gjqj"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="12_wapi5"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://box.tscn" id="14_a2cb0"]
+[ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/finish_zone.gd" id="16_g56ap"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiv1b"]
 texture = ExtResource("6_5g1s2")
@@ -196,6 +197,12 @@ sources/3 = SubResource("TileSetAtlasSource_aiv1b")
 font = ExtResource("12_wapi5")
 font_size = 54
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gjqj"]
+size = Vector2(109, 72)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g56ap"]
+font = ExtResource("12_wapi5")
+
 [node name="Level1" type="Node2D"]
 
 [node name="Timer" type="Timer" parent="."]
@@ -216,9 +223,11 @@ vertical_offset = 45.0
 
 [node name="Player1" parent="." instance=ExtResource("2_1bjei")]
 position = Vector2(-64, 59)
+jump_force = 400.0
 
 [node name="Player2" parent="." instance=ExtResource("3_5g1s2")]
 position = Vector2(55, 59)
+jump_force = 400.0
 
 [node name="Box" parent="." instance=ExtResource("14_a2cb0")]
 position = Vector2(-272, -73)
@@ -316,6 +325,24 @@ text = "00:00"
 label_settings = SubResource("LabelSettings_aiv1b")
 script = ExtResource("2_aiv1b")
 timer_node = NodePath("../../Timer")
+
+[node name="FinishZone" type="Area2D" parent="."]
+position = Vector2(-484, -125)
+script = ExtResource("16_g56ap")
+
+[node name="Timer" type="Timer" parent="FinishZone"]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishZone"]
+position = Vector2(-4.5, -7)
+shape = SubResource("RectangleShape2D_3gjqj")
+
+[node name="CountdownLabel" type="Label" parent="FinishZone"]
+offset_left = 61.0
+offset_top = -35.0
+offset_right = 93.0
+offset_bottom = -19.0
+label_settings = SubResource("LabelSettings_g56ap")
 
 [connection signal="pressed" from="Button" to="Platform" method="button_pressed"]
 [connection signal="released" from="Button" to="Platform" method="button_released"]
