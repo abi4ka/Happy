@@ -39,6 +39,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = -jump_force
 
 	move_and_slide()
+	_push_bodies()
 
 	just_pressed_interact = false
 	if interact_timer > 0.0:
@@ -63,3 +64,13 @@ func _on_animation_finished():
 
 func just_pressed_button() -> bool:
 	return just_pressed_interact
+	
+func _push_bodies():
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider is RigidBody2D:
+			var push_dir = collision.get_normal() * -1.0
+			push_dir.y = 0
+			var force = push_dir * speed / 2
+			collider.apply_central_impulse(force)

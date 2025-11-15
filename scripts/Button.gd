@@ -8,6 +8,8 @@ signal released
 
 var pressed_down := false
 var players_in_range: Array = []
+var boxes_in_range: Array = []
+
 var target_y := 0.0
 var move_speed := 10.0
 
@@ -20,21 +22,34 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		players_in_range.append(body)
 
+	if body.is_in_group("box"):
+		boxes_in_range.append(body)
+		# Ящик автоматически нажимает кнопку
+		if not pressed_down:
+			_press_button()
+
 func _on_body_exited(body):
 	if body.is_in_group("player"):
 		players_in_range.erase(body)
-		if pressed_down and players_in_range.is_empty():
-			_release_button()
+		_check_release()
+
+	if body.is_in_group("box"):
+		boxes_in_range.erase(body)
+		_check_release()
 
 func _process(delta):
 	sprite.position.y = lerp(sprite.position.y, target_y, delta * move_speed)
 
+	# Игроки могут нажать кнопку вручную
 	for player in players_in_range:
 		if player.has_method("just_pressed_button") and player.just_pressed_button():
 			if not pressed_down:
 				_press_button()
 			return
-	if pressed_down and players_in_range.is_empty():
+
+func _check_release():
+	# Отпустить кнопку только если в зоне нет ни одного игрока и ни одного ящика
+	if pressed_down and players_in_range.size() == 0 and boxes_in_range.size() == 0:
 		_release_button()
 
 func _press_button():

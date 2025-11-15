@@ -7,6 +7,7 @@
 size = Vector2(18, 7)
 
 [node name="Button" type="Node2D"]
+z_index = -4
 script = ExtResource("1_n4tde")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
