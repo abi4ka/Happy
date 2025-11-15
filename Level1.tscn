@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=22 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_1bjei"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://platformR.tscn" id="12_3gjqj"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="12_wapi5"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://box.tscn" id="14_a2cb0"]
+[ext_resource type="Texture2D" uid="uid://bomucl4gqreiq" path="res://assets/coin.png" id="15_g56ap"]
 [ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="16_g56ap"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiv1b"]
@@ -308,22 +309,42 @@ move_speed = 100.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="LevelTimerLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -67.5
-offset_top = 20.0
-offset_right = 67.50037
-offset_bottom = 75.0
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.117000006
+offset_bottom = -75.816
 grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_constants/separation = 100
+
+[node name="LevelTimerLabel" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
 text = "00:00"
 label_settings = SubResource("LabelSettings_aiv1b")
 
-[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label")]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/HBoxContainer"]
+position = Vector2(289, 27)
+scale = Vector2(3, 3)
+texture = ExtResource("15_g56ap")
+hframes = 6
+
+[node name="CoinsLabel" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_aiv1b")
+
+[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label", "coins_label")]
 position = Vector2(-484, -125)
 script = ExtResource("16_g56ap")
-level_timer_label = NodePath("../CanvasLayer/LevelTimerLabel")
+level_timer_label = NodePath("../CanvasLayer/Control/HBoxContainer/LevelTimerLabel")
+coins_label = NodePath("../CanvasLayer/Control/HBoxContainer/CoinsLabel")
 
 [node name="Timer" type="Timer" parent="FinishZone"]
 one_shot = true

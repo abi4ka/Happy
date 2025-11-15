@@ -7,6 +7,7 @@ extends Area2D
 @onready var timer: Timer = $Timer
 @onready var countdown_label: Label = $CountdownLabel
 @export var level_timer_label: Label
+@export var coins_label: Label
 
 # ---------------------- ДАННЫЕ УРОВНЯ -------------------
 var total_collected := 0
@@ -76,7 +77,9 @@ func format_time(t: float) -> String:
 func _on_collectible_collected(body):
 	total_collected += 1
 	print("Collected:", total_collected)
-
+	
+	if coins_label:
+		coins_label.text = str(total_collected)
 
 # ========================================================
 #                   ФИНИШНАЯ ЗОНА
