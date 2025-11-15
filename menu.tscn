@@ -121,6 +121,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 text = "Exit"
 
 [node name="LevelsPanel" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

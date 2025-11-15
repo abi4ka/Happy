@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=21 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_1bjei"]
-[ext_resource type="Script" uid="uid://co3c5qnlligg1" path="res://scripts/Timer.gd" id="2_aiv1b"]
 [ext_resource type="PackedScene" uid="uid://b73nevepusppb" path="res://player_2.tscn" id="3_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://b86ummp180mvc" path="res://assets/tileSetMy.png" id="6_5g1s2"]
 [ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://button.tscn" id="7_mlbie"]
@@ -15,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://platformR.tscn" id="12_3gjqj"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="12_wapi5"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://box.tscn" id="14_a2cb0"]
-[ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/finish_zone.gd" id="16_g56ap"]
+[ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="16_g56ap"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiv1b"]
 texture = ExtResource("6_5g1s2")
@@ -205,9 +204,6 @@ font = ExtResource("12_wapi5")
 
 [node name="Level1" type="Node2D"]
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
 zoom = Vector2(5, 5)
 script = ExtResource("1_dn5ey")
@@ -312,7 +308,7 @@ move_speed = 100.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("timer_node")]
+[node name="LevelTimerLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -323,12 +319,11 @@ offset_bottom = 75.0
 grow_horizontal = 2
 text = "00:00"
 label_settings = SubResource("LabelSettings_aiv1b")
-script = ExtResource("2_aiv1b")
-timer_node = NodePath("../../Timer")
 
-[node name="FinishZone" type="Area2D" parent="."]
+[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label")]
 position = Vector2(-484, -125)
 script = ExtResource("16_g56ap")
+level_timer_label = NodePath("../CanvasLayer/LevelTimerLabel")
 
 [node name="Timer" type="Timer" parent="FinishZone"]
 one_shot = true

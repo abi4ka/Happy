@@ -22,6 +22,8 @@ PlayerData="*res://scripts/player_data.gd"
 [global_group]
 
 box=""
+level_timer=""
+collectible=""
 
 [input]
 
