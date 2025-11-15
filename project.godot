@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 PlayerData="*res://scripts/player_data.gd"
 
+[global_group]
+
+box=""
+
 [input]
 
 move_left_p1={

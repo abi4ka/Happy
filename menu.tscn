@@ -121,7 +121,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 text = "Exit"
 
 [node name="LevelsPanel" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -139,7 +138,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 20
 
-[node name="Button" type="Button" parent="LevelsPanel/VBoxContainer"]
+[node name="ButtonLvl1" type="Button" parent="LevelsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ouk20")
 theme_override_font_sizes/font_size = 64

@@ -32,20 +32,19 @@ func _ready():
 	$StatsPanel/Panel/BackButton.pressed.connect(_on_back_pressed)
 	$SettingsPanel/Panel/BackButton.pressed.connect(_on_back_pressed)
 	$SettingsPanel/VBoxContainer/HBoxContainer/Apply.pressed.connect(_on_apply_name_pressed)
+	
+	$LevelsPanel/VBoxContainer/ButtonLvl1.pressed.connect(_on_lvl1_pressed)
 
-	# Отображаем имя (или id) пользователя
-	name_label.text = PlayerData.player_name  # или PlayerData.player_id если надо id
+	name_label.text = PlayerData.player_name
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"): # Esc по умолчанию
+	if event.is_action_pressed("ui_cancel"):
 		_show_only(main_panel)
 
-# Скрываем все панели из toggle_panels кроме переданной
 func _show_only(panel: Control) -> void:
 	for p in toggle_panels:
 		p.visible = (p == panel)
 
-# Обработчики кнопок
 func _on_play_pressed():
 	_show_only(levels_panel)
 
@@ -65,7 +64,6 @@ func _on_apply_name_pressed():
 	var new_name = name_input.text.strip_edges()
 
 	if new_name.is_empty():
-		print("Имя пустое! Не меняем.")
 		return
 
 	PlayerData.player_name = new_name
@@ -73,4 +71,8 @@ func _on_apply_name_pressed():
 
 	name_label.text = new_name
 
-	print("Имя успешно изменено на:", new_name)
+	print("Name changed to:", new_name)
+
+
+func _on_lvl1_pressed():
+	get_tree().change_scene_to_file("res://Level1.tscn")
