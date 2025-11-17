@@ -305,11 +305,15 @@ position = Vector2(-288, -39)
 move_distance = -25.0
 move_speed = 100.0
 
-[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label", "coins_label")]
+[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label", "coins_label", "pause_menu", "resume_button", "retry_button", "mainmenu_button")]
 position = Vector2(-484, -125)
 script = ExtResource("16_g56ap")
 level_timer_label = NodePath("../CanvasLayer/Control/HBoxContainer/LevelTimerLabel")
 coins_label = NodePath("../CanvasLayer/Control/HBoxContainer/CoinsLabel")
+pause_menu = NodePath("../CanvasLayer/PauseMenu")
+resume_button = NodePath("../CanvasLayer/PauseMenu/VBoxContainer/HBoxContainer/ResumeButton")
+retry_button = NodePath("../CanvasLayer/PauseMenu/VBoxContainer/HBoxContainer/RestartButton")
+mainmenu_button = NodePath("../CanvasLayer/PauseMenu/VBoxContainer/MainMenuButton")
 
 [node name="Timer" type="Timer" parent="FinishZone"]
 one_shot = true
@@ -362,7 +366,8 @@ layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_aiv1b")
 
-[node name="Control2" type="Control" parent="CanvasLayer"]
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchor_left = 0.2
 anchor_top = 0.2
@@ -371,7 +376,7 @@ anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -382,26 +387,26 @@ offset_bottom = 137.0
 grow_horizontal = 2
 theme_override_constants/separation = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PauseMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 50
 
-[node name="Button" type="Button" parent="CanvasLayer/Control2/VBoxContainer/HBoxContainer"]
+[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseMenu/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_wapi5")
 theme_override_font_sizes/font_size = 48
 text = "Resume"
 
-[node name="Button2" type="Button" parent="CanvasLayer/Control2/VBoxContainer/HBoxContainer"]
+[node name="RestartButton" type="Button" parent="CanvasLayer/PauseMenu/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_wapi5")
 theme_override_font_sizes/font_size = 48
 text = "Retry"
 
-[node name="Button" type="Button" parent="CanvasLayer/Control2/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/PauseMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_wapi5")
 theme_override_font_sizes/font_size = 48

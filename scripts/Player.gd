@@ -20,6 +20,10 @@ func _ready():
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 func _physics_process(delta: float) -> void:
+	if GameState.is_paused:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 	if is_pushing:
 		velocity.x = 0
 		move_and_slide()
