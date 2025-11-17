@@ -1,6 +1,5 @@
 extends Area2D
 
-# ---------------------- НАСТРОЙКИ ----------------------
 @export var level_id: int = 1
 @export var countdown_duration: float = 5.0
 
@@ -9,19 +8,14 @@ extends Area2D
 @export var level_timer_label: Label
 @export var coins_label: Label
 
-# ---------------------- ДАННЫЕ УРОВНЯ -------------------
 var total_collected := 0
 var players_inside := {}
 
 var countdown_time := 0.0
 var counting := false
 
-var elapsed_time: float = 0.0   # <<<<<< ОБЪЕДИНЕННЫЙ ТАЙМЕР УРОВНЯ
+var elapsed_time: float = 0.0
 
-
-# ========================================================
-#                      READY
-# ========================================================
 func _ready():
 	connect("body_entered", _on_body_enter)
 	connect("body_exited", _on_body_exit)
@@ -38,15 +32,10 @@ func _register_collectibles():
 	for collectible in get_tree().get_nodes_in_group("collectible"):
 		collectible.connect("collected", Callable(self, "_on_collectible_collected"))
 
-# ========================================================
-#                   ТАЙМЕР УРОВНЯ
-# ========================================================
 func _process(delta):
-	# •• время уровня
 	elapsed_time += delta
 	level_timer_label.text = format_time(elapsed_time)
 
-	# •• таймер финишной зоны
 	if counting:
 		countdown_time -= delta
 
@@ -70,10 +59,6 @@ func format_time(t: float) -> String:
 	var centi = int((t - int(t)) * 100)
 	return "%02d:%02d:%02d" % [minutes, seconds, centi]
 
-
-# ========================================================
-#                 СБОР МОНЕТ
-# ========================================================
 func _on_collectible_collected(body):
 	total_collected += 1
 	print("Collected:", total_collected)
@@ -81,9 +66,6 @@ func _on_collectible_collected(body):
 	if coins_label:
 		coins_label.text = str(total_collected)
 
-# ========================================================
-#                   ФИНИШНАЯ ЗОНА
-# ========================================================
 func _on_body_enter(body):
 	if body.is_in_group("player"):
 		players_inside[body.get_instance_id()] = true
@@ -109,10 +91,6 @@ func _check_players():
 	else:
 		_reset_countdown()
 
-
-# ========================================================
-#                   ОТСЧЁТ ВРЕМЕНИ
-# ========================================================
 func _start_countdown():
 	countdown_time = countdown_duration
 	counting = true
@@ -146,20 +124,14 @@ func _update_label():
 func _on_timer_timeout():
 	finish_level()
 
-
-# ========================================================
-#                  ФИНАЛИЗАЦИЯ УРОВНЯ
-# ========================================================
 func finish_level():
 	counting = false
 	countdown_label.visible = false
 
 	var time_passed = get_elapsed_time()
 
-	# Достаём сохранённые данные
 	var saved_data = PlayerData._get_level(level_id)
 
-	# Если уровня ещё нет в сохранении — регистрируем
 	if saved_data == null:
 		PlayerData.register_level(level_id)
 		saved_data = PlayerData._get_level(level_id)
@@ -167,17 +139,14 @@ func finish_level():
 	var saved_coins = saved_data.coins
 	var saved_time = saved_data.best_time
 
-	# Выводим текущие результаты
 	print("==================== LEVEL FINISHED ====================")
 	print(" Level:", level_id)
 	print(" Current coins:", total_collected)
 	print(" Current time:", format_time(time_passed))
 
-	# Выводим результаты из сохранения
 	print(" Saved coins:", saved_coins)
 	print(" Saved best time:", "NONE" if saved_time == null else format_time(saved_time))
 
-	# ЛОГИКА СОХРАНЕНИЯ
 	if total_collected > saved_coins:
 		print(" → NEW RECORD: more coins, saving.")
 		PlayerData.update_level_result(level_id, total_collected, time_passed)
