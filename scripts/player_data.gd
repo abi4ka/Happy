@@ -6,13 +6,8 @@ var player_id := ""
 var player_name := ""
 var levels := []
 
-
 func _ready():
 	load_data()
-
-# ======================================================
-#              РЕЗУЛЬТАТЫ УРОВНЕЙ
-# ======================================================
 
 func register_level(lvl_id: int):
 	for lvl in levels:
@@ -42,18 +37,15 @@ func update_level_result(lvl_id: int, new_coins: int, new_time: float):
 	var old_coins = lvl.coins
 	var old_time = lvl.best_time
 
-	# правило 1 — монеты хуже
 	if new_coins < old_coins:
 		return
 
-	# правило 2 — монеты лучше
 	if new_coins > old_coins:
 		lvl.coins = new_coins
 		lvl.best_time = new_time
 		save_data()
 		return
 
-	# правило 3 — монеты равны → сравнить время
 	if old_time == null or new_time < old_time:
 		lvl.best_time = new_time
 		save_data()
@@ -64,10 +56,6 @@ func _get_level(lvl_id: int):
 		if lvl.lvl_id == lvl_id:
 			return lvl
 	return null
-
-# ======================================================
-#                СИСТЕМА СОХРАНЕНИЙ
-# ======================================================
 
 func save_data():
 	var data = {

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://5gudnpthoug7"]
+
+[ext_resource type="Script" uid="uid://dhedpygpbt078" path="res://scripts/LevelStatEntry.gd" id="1_4qywg"]
+[ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="2_yeqx8"]
+
+[node name="LevelStatEntry" type="HBoxContainer" node_paths=PackedStringArray("label_rank", "label_name", "label_coins", "label_time")]
+theme_override_constants/separation = 25
+script = ExtResource("1_4qywg")
+label_rank = NodePath("LabelRank")
+label_name = NodePath("LabelName")
+label_coins = NodePath("LabelCoins")
+label_time = NodePath("LabelTime")
+
+[node name="LabelRank" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Rank"
+label_settings = ExtResource("2_yeqx8")
+horizontal_alignment = 1
+
+[node name="LabelName" type="Label" parent="."]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+text = "Name"
+label_settings = ExtResource("2_yeqx8")
+horizontal_alignment = 1
+
+[node name="LabelCoins" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Coins"
+label_settings = ExtResource("2_yeqx8")
+horizontal_alignment = 1
+
+[node name="LabelTime" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Time"
+label_settings = ExtResource("2_yeqx8")
+horizontal_alignment = 1

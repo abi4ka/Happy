@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerData="*res://scripts/player_data.gd"
 GameState="*res://scripts/GameState.gd"
+PlayersLoader="*res://scripts/PlayersLoader.gd"
 
 [global_group]
 
