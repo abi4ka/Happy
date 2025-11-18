@@ -28,13 +28,18 @@ func _on_request_send_completed(result, response_code, headers, body):
 	print("[SEND] Body:", body.get_string_from_utf8())
 
 
-func fetch_player_data(player_id: String) -> void:
+func fetch_player_data(player_id: String, target: Object = null, method_name: String = "") -> void:
 	print("\n[GET] Fetching leaderboard for:", player_id)
 
 	var http := HTTPRequest.new()
 	add_child(http)
 
-	http.request_completed.connect(_on_request_get_completed)
+	# Передаем callback
+	http.request_completed.connect(func(result, response_code, headers, body):
+		_on_request_get_completed(result, response_code, headers, body)
+		if target and method_name != "":
+			target.call_deferred(method_name)
+	)
 
 	var url := SERVER_LEADERBOARD_URL + player_id
 	http.request(url)
@@ -49,7 +54,6 @@ func _on_request_get_completed(result, response_code, headers, body):
 
 	var text: String = body.get_string_from_utf8()
 	var parsed: Variant = JSON.parse_string(text)
-
 
 	if parsed == null:
 		print("[GET] JSON parse error!")

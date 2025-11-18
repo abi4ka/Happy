@@ -58,7 +58,7 @@ func send_player_to_server() -> void:
 
 	ServerSync.send_player_stats(local)
 
-func fetch_all_players_from_server() -> void:
+func fetch_all_players_from_server(target: Object = null, method_name: String = "") -> void:
 	var local: Dictionary = _load_local_player()
 	if local.size() == 0:
 		print("[ERROR] Can't fetch server players — missing local player id")
@@ -69,4 +69,4 @@ func fetch_all_players_from_server() -> void:
 		return
 
 	var player_id: String = str(local["id"])
-	ServerSync.fetch_player_data(player_id)
+	ServerSync.fetch_player_data(player_id, target, method_name)

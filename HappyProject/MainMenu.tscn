@@ -184,6 +184,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
 [node name="StatsPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("list_container", "sync_button")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -196,6 +197,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
 script = ExtResource("4_e2xy7")
+level_id = null
 entry_prefab = ExtResource("5_fimr5")
 list_container = NodePath("VBoxContainer")
 sync_button = NodePath("Panel/SyncButton")

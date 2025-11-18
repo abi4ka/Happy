@@ -58,4 +58,7 @@ func _cmp_by_time(a: Dictionary, b: Dictionary) -> int:
 
 func _on_sync_pressed():
 	PlayersLoader.send_player_to_server()
-	PlayersLoader.fetch_all_players_from_server()
+	PlayersLoader.fetch_all_players_from_server(self, "_on_players_fetched")
+
+func _on_players_fetched():
+	update_leaderboard()
