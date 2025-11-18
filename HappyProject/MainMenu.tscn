@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://xynq5he18fh6"]
+[gd_scene load_steps=13 format=3 uid="uid://xynq5he18fh6"]
 
 [ext_resource type="Script" uid="uid://c7qn3aaspc7mp" path="res://scripts/MenuControl.gd" id="1_iwfq2"]
 [ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="2_7r1g0"]
@@ -13,6 +13,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mae5d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hy44"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iwfq2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mae5d"]
 font = ExtResource("3_cqjrg")
@@ -181,8 +183,7 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
-[node name="StatsPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("list_container")]
-visible = false
+[node name="StatsPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("list_container", "sync_button")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -197,25 +198,37 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
 script = ExtResource("4_e2xy7")
 entry_prefab = ExtResource("5_fimr5")
 list_container = NodePath("VBoxContainer")
+sync_button = NodePath("Panel/SyncButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="StatsPanel"]
+[node name="LevelStatEntry" parent="StatsPanel/VBoxContainer" instance=ExtResource("5_fimr5")]
+layout_mode = 2
+
+[node name="Panel" type="HBoxContainer" parent="StatsPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/separation = 100
 
 [node name="BackButton" type="Button" parent="StatsPanel/Panel"]
-layout_mode = 0
-offset_top = -64.0
-offset_right = 150.0
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
+
+[node name="SyncButton" type="Button" parent="StatsPanel/Panel"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cqjrg")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iwfq2")
+text = "Data sync"
 
 [node name="SettingsPanel" type="PanelContainer" parent="."]
 visible = false

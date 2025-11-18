@@ -3,8 +3,10 @@ extends Control
 @export var level_id := 1
 @export var entry_prefab: PackedScene
 @export var list_container: VBoxContainer
+@export var sync_button: Button
 
 func _ready():
+	sync_button.pressed.connect(_on_sync_pressed)
 	update_leaderboard()
 
 
@@ -53,3 +55,7 @@ func _cmp_by_time(a: Dictionary, b: Dictionary) -> int:
 	elif at > bt:
 		return 1
 	return 0
+
+func _on_sync_pressed():
+	PlayersLoader.send_player_to_server()
+	PlayersLoader.fetch_all_players_from_server()

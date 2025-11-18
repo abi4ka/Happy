@@ -7,11 +7,9 @@ extends Control
 @onready var name_label     = $UserNamePanel/UserNameLabel
 
 @onready var name_input = $SettingsPanel/VBoxContainer/HBoxContainer/NameInput
-# Сюда добавляй все панели, которые должны переключаться кнопками
 var toggle_panels: Array[Control]
 
 func _ready():
-	# Инициализация списка переключаемых панелей
 	toggle_panels = [
 		main_panel,
 		levels_panel,
@@ -19,10 +17,8 @@ func _ready():
 		settings_panel
 	]
 
-	# В начале показываем только главное меню (и скрываем остальные toggle-панели)
 	_show_only(main_panel)
 
-	# Подключаем сигналы
 	$MainPanel/PlayButton.pressed.connect(_on_play_pressed)
 	$MainPanel/StatsButton.pressed.connect(_on_stats_pressed)
 	$MainPanel/SettingsButton.pressed.connect(_on_settings_pressed)
