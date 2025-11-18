@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from api.views import UploadStatsView, LeaderboardView
+from happyserver.endpoints import UploadStatsView, LeaderboardView
 
 urlpatterns = [
     path('upload_stats/', UploadStatsView.as_view(), name='upload_stats'),
