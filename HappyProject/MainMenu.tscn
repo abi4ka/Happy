@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://xynq5he18fh6"]
+[gd_scene load_steps=14 format=3 uid="uid://xynq5he18fh6"]
 
 [ext_resource type="Script" uid="uid://c7qn3aaspc7mp" path="res://scripts/MenuControl.gd" id="1_iwfq2"]
 [ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="2_7r1g0"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="3_cqjrg"]
 [ext_resource type="Script" uid="uid://cnl2xdbs5jy70" path="res://scripts/LevelStatsCreator.gd" id="4_e2xy7"]
 [ext_resource type="PackedScene" uid="uid://5gudnpthoug7" path="res://LevelStatEntry.tscn" id="5_fimr5"]
+[ext_resource type="PackedScene" uid="uid://c6so6fcx41rb5" path="res://background.tscn" id="6_7r1g0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytr4m"]
 
@@ -22,8 +23,20 @@ font_size = 48
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l48gv"]
 
-[node name="Menu" type="Control"]
+[node name="node" type="Control"]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" parent="." instance=ExtResource("6_7r1g0")]
+position = Vector2(960, 973)
+scale = Vector2(3, 3)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,19 +44,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iwfq2")
 
-[node name="Background" type="Node2D" parent="."]
-
-[node name="UserNamePanel" type="Panel" parent="."]
+[node name="UserNamePanel" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
+offset_left = -7.5
 offset_top = 10.0
-offset_right = -15.0
+offset_right = -7.5
+offset_bottom = 10.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ytr4m")
 
-[node name="UserNameLabel" type="Label" parent="UserNamePanel"]
+[node name="UserNameLabel" type="Label" parent="Control/UserNamePanel"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -56,7 +69,7 @@ label_settings = ExtResource("2_7r1g0")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="InfoPanel" type="VBoxContainer" parent="."]
+[node name="InfoPanel" type="VBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -69,18 +82,18 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VersionLabel" type="Label" parent="InfoPanel"]
+[node name="VersionLabel" type="Label" parent="Control/InfoPanel"]
 layout_mode = 2
 text = "Version 0.1"
 label_settings = ExtResource("2_7r1g0")
 vertical_alignment = 2
 
-[node name="CreatorLabel" type="Label" parent="InfoPanel"]
+[node name="CreatorLabel" type="Label" parent="Control/InfoPanel"]
 layout_mode = 2
 text = "Сreated by abik"
 label_settings = ExtResource("2_7r1g0")
 
-[node name="MainPanel" type="VBoxContainer" parent="."]
+[node name="MainPanel" type="VBoxContainer" parent="Control"]
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -92,7 +105,7 @@ offset_right = 475.0
 offset_bottom = 180.0
 grow_vertical = 2
 
-[node name="PlayButton" type="Button" parent="MainPanel"]
+[node name="PlayButton" type="Button" parent="Control/MainPanel"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_cqjrg")
@@ -100,7 +113,7 @@ theme_override_font_sizes/font_size = 86
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 text = "Play"
 
-[node name="StatsButton" type="Button" parent="MainPanel"]
+[node name="StatsButton" type="Button" parent="Control/MainPanel"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_cqjrg")
@@ -108,7 +121,7 @@ theme_override_font_sizes/font_size = 86
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 text = "Statistics"
 
-[node name="SettingsButton" type="Button" parent="MainPanel"]
+[node name="SettingsButton" type="Button" parent="Control/MainPanel"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_cqjrg")
@@ -116,7 +129,7 @@ theme_override_font_sizes/font_size = 86
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="MainPanel"]
+[node name="ExitButton" type="Button" parent="Control/MainPanel"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_cqjrg")
@@ -124,7 +137,7 @@ theme_override_font_sizes/font_size = 86
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ouk20")
 text = "Exit"
 
-[node name="LevelsPanel" type="PanelContainer" parent="."]
+[node name="LevelsPanel" type="PanelContainer" parent="Control"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -138,41 +151,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelsPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/LevelsPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 20
 
-[node name="ButtonLvl1" type="Button" parent="LevelsPanel/VBoxContainer"]
+[node name="ButtonLvl1" type="Button" parent="Control/LevelsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 64
 text = "1 lvl"
 
-[node name="Button2" type="Button" parent="LevelsPanel/VBoxContainer"]
+[node name="Button2" type="Button" parent="Control/LevelsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 64
 text = "2 lvl"
 
-[node name="Button3" type="Button" parent="LevelsPanel/VBoxContainer"]
+[node name="Button3" type="Button" parent="Control/LevelsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 64
 text = "3 lvl"
 
-[node name="Button4" type="Button" parent="LevelsPanel/VBoxContainer"]
+[node name="Button4" type="Button" parent="Control/LevelsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 64
 text = "4 lvl"
 
-[node name="Panel" type="Panel" parent="LevelsPanel"]
+[node name="Panel" type="Panel" parent="Control/LevelsPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="BackButton" type="Button" parent="LevelsPanel/Panel"]
+[node name="BackButton" type="Button" parent="Control/LevelsPanel/Panel"]
 layout_mode = 0
 offset_top = -64.0
 offset_right = 150.0
@@ -183,7 +196,7 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
-[node name="StatsPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("list_container", "sync_button")]
+[node name="StatsPanel" type="PanelContainer" parent="Control" node_paths=PackedStringArray("list_container", "sync_button")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -200,22 +213,22 @@ entry_prefab = ExtResource("5_fimr5")
 list_container = NodePath("VBoxContainer2/VBoxContainer")
 sync_button = NodePath("Panel/SyncButton")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="StatsPanel"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/StatsPanel"]
 layout_mode = 2
 
-[node name="LevelStatEntry" parent="StatsPanel/VBoxContainer2" instance=ExtResource("5_fimr5")]
+[node name="LevelStatEntry" parent="Control/StatsPanel/VBoxContainer2" instance=ExtResource("5_fimr5")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/StatsPanel/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Panel" type="HBoxContainer" parent="StatsPanel"]
+[node name="Panel" type="HBoxContainer" parent="Control/StatsPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 100
 
-[node name="BackButton" type="Button" parent="StatsPanel/Panel"]
+[node name="BackButton" type="Button" parent="Control/StatsPanel/Panel"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -225,7 +238,7 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
-[node name="SyncButton" type="Button" parent="StatsPanel/Panel"]
+[node name="SyncButton" type="Button" parent="Control/StatsPanel/Panel"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_cqjrg")
@@ -233,7 +246,7 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxEmpty_iwfq2")
 text = "Data sync"
 
-[node name="SettingsPanel" type="PanelContainer" parent="."]
+[node name="SettingsPanel" type="PanelContainer" parent="Control"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -247,26 +260,26 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/SettingsPanel"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/SettingsPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="Label" type="Label" parent="SettingsPanel/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Player name: "
 label_settings = SubResource("LabelSettings_mae5d")
 
-[node name="NameInput" type="LineEdit" parent="SettingsPanel/VBoxContainer/HBoxContainer"]
+[node name="NameInput" type="LineEdit" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 36
 placeholder_text = "God of this world 666"
 
-[node name="Apply" type="Button" parent="SettingsPanel/VBoxContainer/HBoxContainer"]
+[node name="Apply" type="Button" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_cqjrg")
@@ -274,12 +287,12 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
 text = "Apply"
 
-[node name="Panel" type="Panel" parent="SettingsPanel"]
+[node name="Panel" type="Panel" parent="Control/SettingsPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="BackButton" type="Button" parent="SettingsPanel/Panel"]
+[node name="BackButton" type="Button" parent="Control/SettingsPanel/Panel"]
 layout_mode = 0
 offset_top = -64.0
 offset_right = 150.0
