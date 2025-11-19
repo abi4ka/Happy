@@ -19,17 +19,18 @@ func update_leaderboard():
 
 	var level_stats = []
 
-
 	for p in players:
 		for lvl in p.get("levels", []):
 			if int(lvl["lvl_id"]) == level_id:
 				level_stats.append({
 					"name": p.get("name", "???"),
-					"coins": lvl.get("coins", 0),
+					"coins": int(lvl.get("coins", 0)),
 					"best_time": lvl.get("best_time", 9999999)
 				})
-
-	level_stats.sort_custom(Callable(self, "_cmp_by_time"))
+	
+	print(level_stats)
+	level_stats = _sort_level_stats_by_keys(level_stats)
+	print(level_stats)
 
 	var rank := 1
 	for s in level_stats:
@@ -38,23 +39,18 @@ func update_leaderboard():
 		list_container.add_child(entry)
 		rank += 1
 
+func _sort_level_stats_by_keys(arr: Array) -> Array:
+	var tuples := []
+	for item in arr:
+		var coins := -int(item.get("coins", 0))
+		var time := float(item.get("best_time", 9999999.0))
+		tuples.append([coins, time, item])
+	tuples.sort()
+	var out := []
+	for t in tuples:
+		out.append(t[2])
+	return out
 
-func _cmp_by_time(a: Dictionary, b: Dictionary) -> int:
-	var at = a.get("best_time", null)
-	var bt = b.get("best_time", null)
-
-	if at == null and bt == null:
-		return 0
-	if at == null:
-		return 1
-	if bt == null:
-		return -1
-
-	if at < bt:
-		return -1
-	elif at > bt:
-		return 1
-	return 0
 
 func _on_sync_pressed():
 	PlayersLoader.send_player_to_server()
