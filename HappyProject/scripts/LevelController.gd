@@ -8,10 +8,8 @@ extends Area2D
 @export var level_timer_label: Label
 @export var coins_label: Label
 
-@export var pause_menu: Control
-@export var resume_button: Button
-@export var retry_button: Button
-@export var mainmenu_button: Button
+@export var pause_manager: Node
+
 var is_paused := false
 
 var total_collected := 0
@@ -33,18 +31,16 @@ func _ready():
 
 	PlayerData.add_attempt(level_id)
 	
-	resume_button.pressed.connect(_resume_game)
-	retry_button.pressed.connect(_restart_level)
-	mainmenu_button.pressed.connect(_go_to_main_menu)
-
 
 func _register_collectibles():
 	for collectible in get_tree().get_nodes_in_group("collectible"):
 		collectible.connect("collected", Callable(self, "_on_collectible_collected"))
 
 func _process(delta):
+	is_paused = GameState.is_paused
 	if is_paused:
-		return 
+		return
+
 		
 	elapsed_time += delta
 	level_timer_label.text = format_time(elapsed_time)
@@ -175,34 +171,3 @@ func finish_level():
 		print(" → NO UPDATE: fewer coins.")
 
 	print("==========================================================")
-
-func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and event.is_action_pressed("ui_cancel"):
-		if is_paused:
-			_resume_game()
-		else:
-			_pause_game()
-
-func _pause_game():
-	is_paused = true
-	GameState.is_paused = true
-	pause_menu.visible = true
-	set_process(false)
-	timer.stop()
-	print("Game paused")
-
-
-func _resume_game():
-	is_paused = false
-	GameState.is_paused = false
-	pause_menu.visible = false
-	set_process(true)
-	if counting:
-		timer.start(countdown_time)
-	print("Game resumed")
-
-func _restart_level():
-	get_tree().reload_current_scene()
-
-func _go_to_main_menu():
-	get_tree().change_scene_to_file("res://MainMenu.tscn")

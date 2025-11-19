@@ -28,9 +28,7 @@ func update_leaderboard():
 					"best_time": lvl.get("best_time", 9999999)
 				})
 	
-	print(level_stats)
 	level_stats = _sort_level_stats_by_keys(level_stats)
-	print(level_stats)
 
 	var rank := 1
 	for s in level_stats:

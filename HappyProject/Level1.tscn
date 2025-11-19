@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=23 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_1bjei"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://box.tscn" id="14_a2cb0"]
 [ext_resource type="Texture2D" uid="uid://bomucl4gqreiq" path="res://assets/coin.png" id="15_g56ap"]
 [ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="16_g56ap"]
+[ext_resource type="Script" uid="uid://cyrg1qm0y0b2q" path="res://scripts/PauseManager.gd" id="16_na6ls"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aiv1b"]
 texture = ExtResource("6_5g1s2")
@@ -305,15 +306,11 @@ position = Vector2(-288, -39)
 move_distance = -25.0
 move_speed = 100.0
 
-[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label", "coins_label", "pause_menu", "resume_button", "retry_button", "mainmenu_button")]
+[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label", "coins_label")]
 position = Vector2(-484, -125)
 script = ExtResource("16_g56ap")
-level_timer_label = NodePath("../CanvasLayer/Control/HBoxContainer/LevelTimerLabel")
-coins_label = NodePath("../CanvasLayer/Control/HBoxContainer/CoinsLabel")
-pause_menu = NodePath("../CanvasLayer/PauseMenu")
-resume_button = NodePath("../CanvasLayer/PauseMenu/VBoxContainer/HBoxContainer/ResumeButton")
-retry_button = NodePath("../CanvasLayer/PauseMenu/VBoxContainer/HBoxContainer/RestartButton")
-mainmenu_button = NodePath("../CanvasLayer/PauseMenu/VBoxContainer/MainMenuButton")
+level_timer_label = NodePath("../CanvasLayer/CanvasLayer/Control/HBoxContainer/LevelTimerLabel")
+coins_label = NodePath("../CanvasLayer/CanvasLayer/Control/HBoxContainer/CoinsLabel")
 
 [node name="Timer" type="Timer" parent="FinishZone"]
 one_shot = true
@@ -329,42 +326,12 @@ offset_right = 93.0
 offset_bottom = -19.0
 label_settings = SubResource("LabelSettings_g56ap")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchor_top = 0.02
-anchor_right = 1.0
-anchor_bottom = 0.15
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -131.0
-offset_right = 131.0
-offset_bottom = 55.0
-grow_horizontal = 2
-theme_override_constants/separation = 100
-
-[node name="LevelTimerLabel" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
-layout_mode = 2
-text = "00:00"
-label_settings = SubResource("LabelSettings_aiv1b")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/HBoxContainer"]
-position = Vector2(289, 27)
-scale = Vector2(3, 3)
-texture = ExtResource("15_g56ap")
-hframes = 6
-
-[node name="CoinsLabel" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
-layout_mode = 2
-text = "0"
-label_settings = SubResource("LabelSettings_aiv1b")
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("pause_menu", "resume_button", "retry_button", "mainmenu_button")]
+script = ExtResource("16_na6ls")
+pause_menu = NodePath("PauseMenu")
+resume_button = NodePath("PauseMenu/VBoxContainer/HBoxContainer/ResumeButton")
+retry_button = NodePath("PauseMenu/VBoxContainer/HBoxContainer/RestartButton")
+mainmenu_button = NodePath("PauseMenu/VBoxContainer/MainMenuButton")
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 visible = false
@@ -411,6 +378,43 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("12_wapi5")
 theme_override_font_sizes/font_size = 48
 text = "Main menu"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer"]
+
+[node name="Control" type="Control" parent="CanvasLayer/CanvasLayer"]
+layout_mode = 3
+anchor_top = 0.02
+anchor_right = 1.0
+anchor_bottom = 0.15
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -131.0
+offset_right = 131.0
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_constants/separation = 100
+
+[node name="LevelTimerLabel" type="Label" parent="CanvasLayer/CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_aiv1b")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/CanvasLayer/Control/HBoxContainer"]
+position = Vector2(289, 27)
+scale = Vector2(3, 3)
+texture = ExtResource("15_g56ap")
+hframes = 6
+
+[node name="CoinsLabel" type="Label" parent="CanvasLayer/CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_aiv1b")
 
 [connection signal="pressed" from="Button" to="Platform" method="button_pressed"]
 [connection signal="released" from="Button" to="Platform" method="button_released"]
