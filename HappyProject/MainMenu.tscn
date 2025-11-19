@@ -197,6 +197,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4hy44")
 text = "Back"
 
 [node name="StatsPanel" type="PanelContainer" parent="Control" node_paths=PackedStringArray("list_container", "sync_button")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
