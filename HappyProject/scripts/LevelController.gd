@@ -5,8 +5,8 @@ extends Area2D
 
 @onready var timer: Timer = $Timer
 @onready var countdown_label: Label = $CountdownLabel
-@export var level_timer_label: Label
-@export var coins_label: Label
+
+@export var ui: UIState
 
 @export var pause_manager: Node
 
@@ -43,7 +43,7 @@ func _process(delta):
 
 		
 	elapsed_time += delta
-	level_timer_label.text = format_time(elapsed_time)
+	ui.set_time_text(format_time(elapsed_time))
 
 	if counting:
 		countdown_time -= delta
@@ -72,8 +72,7 @@ func _on_collectible_collected(body):
 	total_collected += 1
 	print("Collected:", total_collected)
 	
-	if coins_label:
-		coins_label.text = str(total_collected)
+	ui.set_coins_text(total_collected) 
 
 func _on_body_enter(body):
 	if body.is_in_group("player"):

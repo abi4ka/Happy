@@ -1,18 +1,22 @@
-[gd_scene load_steps=38 format=3 uid="uid://bxl33iupghc8x"]
+[gd_scene load_steps=48 format=3 uid="uid://bxl33iupghc8x"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_ex07k"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_psxy2"]
 [ext_resource type="PackedScene" uid="uid://b73nevepusppb" path="res://player_2.tscn" id="3_wwdpc"]
 [ext_resource type="Texture2D" uid="uid://b86ummp180mvc" path="res://assets/tileSetMy.png" id="4_6faey"]
 [ext_resource type="PackedScene" uid="uid://cn0jxdh68opny" path="res://pause_menu.tscn" id="5_psxy2"]
+[ext_resource type="PackedScene" uid="uid://boya426tynkqh" path="res://ui_state.tscn" id="6_0xt02"]
 [ext_resource type="PackedScene" uid="uid://c6so6fcx41rb5" path="res://background.tscn" id="6_wwdpc"]
 [ext_resource type="Texture2D" uid="uid://cy70xvng3xjcw" path="res://assets/hedgehog.png" id="7_6faey"]
 [ext_resource type="Script" uid="uid://dccvrofomgjyg" path="res://scripts/Enemy.gd" id="7_nc7oo"]
 [ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://button.tscn" id="9_46pvi"]
 [ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://platform.tscn" id="10_fvkd4"]
+[ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="10_jw1dd"]
+[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="11_0xt02"]
 [ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://platformR.tscn" id="11_pj4lr"]
 [ext_resource type="PackedScene" uid="uid://ch5vgn6n5mn8m" path="res://platformV.tscn" id="12_pj4lr"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://box.tscn" id="13_00xh1"]
+[ext_resource type="PackedScene" uid="uid://mgbumprcwhpt" path="res://coin.tscn" id="14_00xh1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nc7oo"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -369,8 +373,26 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6x3wt"]
 size = Vector2(17, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0xi3"]
+size = Vector2(109, 72)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nwnlh"]
+font = ExtResource("11_0xt02")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tfmj"]
 size = Vector2(80, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj4lr"]
+size = Vector2(112, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00xh1"]
+size = Vector2(80, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jw1dd"]
+size = Vector2(160, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xt02"]
+size = Vector2(224, 64)
 
 [node name="Level2" type="Node2D"]
 
@@ -398,28 +420,32 @@ texture_filter = 1
 tile_set = SubResource("TileSet_6x3wt")
 format = 2
 layer_0/name = "Main"
-layer_0/tile_data = PackedInt32Array(-262149, 3, 9, -262148, 3, 9, -262147, 3, 9, -262146, 3, 9, -262145, 3, 9, -131070, 3, 9, -65534, 3, 9, -131069, 3, 9, -65533, 3, 9, -131068, 3, 9, -65532, 3, 9, -131067, 3, 9, -65531, 3, 9, -131066, 3, 9, -65530, 3, 9, -65548, 3, 9, -12, 3, 9, -65547, 3, 9, -11, 3, 9, -65546, 3, 9, -10, 3, 9, -65545, 3, 9, -9, 3, 9, -65544, 3, 9, -8, 3, 9, -65543, 3, 9, -7, 3, 9, -65542, 3, 9, -6, 3, 9, -196613, 3, 9, -65541, 3, 9, -5, 3, 9, -196612, 3, 9, -65540, 3, 9, -4, 3, 9, -196611, 3, 9, -65539, 3, 9, -3, 3, 9, -196610, 3, 9, -65538, 3, 9, -2, 3, 9, -196609, 3, 9, -65537, 3, 9, -1, 3, 9, -131072, 3, 9, -65536, 3, 9, -131071, 3, 9, -65535, 3, 9, -524285, 3, 9, -458749, 3, 9, -524284, 3, 9, -458748, 3, 9, -524283, 3, 9, -458747, 3, 9, -524282, 3, 9, -458746, 3, 9, -524281, 3, 9, -458745, 3, 9, -131065, 3, 9, -65529, 3, 9, -131064, 3, 9, -65528, 3, 9, -131063, 3, 9, -65527, 3, 9, -13, 3, 9, -65549, 3, 9, -65550, 3, 9, -14, 3, 9, -15, 3, 9, -65551, 3, 9, -65552, 3, 9, -16, 3, 9, -17, 3, 9, -65553, 3, 9, -65554, 3, 9, -18, 3, 9, -393234, 3, 9, -327698, 3, 9, -262162, 3, 9, -196626, 3, 9, -131090, 3, 9, -327697, 3, 9, -327696, 3, 9, -327695, 3, 9, -327694, 3, 9, -327693, 3, 9, -393233, 3, 9, -393232, 3, 9, -393231, 3, 9, -393230, 3, 9, -393229, 3, 9, -327689, 3, 9, -327688, 3, 9, -19, 3, 9, -65555, 3, 9, -131091, 3, 9, -196627, 3, 9, -262163, 3, 9, -327699, 3, 9, -393235, 3, 9, -327690, 3, 9, -262154, 3, 9, -262153, 3, 9, -262152, 3, 9, -65525, 3, 9, -131061, 3, 9, -131062, 3, 9, -65526, 3, 9, -65524, 3, 9, -65523, 3, 9, -65522, 3, 9, -65521, 3, 9, -65520, 3, 9, -65519, 3, 9, -65518, 3, 9, -131054, 3, 9, -131055, 3, 9, -131056, 3, 9, -131057, 3, 9, -131058, 3, 9, -131059, 3, 9, -131060, 3, 9, -65517, 3, 9, -131053, 3, 9, -131052, 3, 9, -65516, 3, 9, -65515, 3, 9, -131051, 3, 9, -131050, 3, 9, -65514, 3, 9, -65513, 3, 9, -131049, 3, 9, 22, 3, 9, 21, 3, 9, 20, 3, 9, 19, 3, 9, 18, 3, 9, 17, 3, 9, 65553, 3, 9, 65552, 3, 9, 65551, 3, 9, 131087, 3, 9, 131086, 3, 9, 131085, 3, 9, 131084, 3, 9, 196620, 3, 9, 196619, 3, 9, 196618, 3, 9, 196617, 3, 9, 196616, 3, 9, 196615, 3, 9, 196614, 3, 9, 196613, 3, 9, 196612, 3, 9, 196611, 3, 9, 196610, 3, 9, 196609, 3, 9, 196608, 3, 9, 262143, 3, 9, 262142, 3, 9, 262141, 3, 9, 262140, 3, 9, 262139, 3, 9, 262138, 3, 9, 262137, 3, 9, 262136, 3, 9, 262135, 3, 9, 262134, 3, 9, 262133, 3, 9, 196596, 3, 9, 196595, 3, 9, 196594, 3, 9, 196593, 3, 9, 131057, 3, 9, 131056, 3, 9, 65520, 3, 9, 65519, 3, 9, 65518, 3, 9, 65517, 3, 9, 65521, 3, 9, 65522, 3, 9, 65523, 3, 9, 65524, 3, 9, 65525, 3, 9, 65526, 3, 9, 65527, 3, 9, 65528, 3, 9, 65529, 3, 9, 65530, 3, 9, 65531, 3, 9, 65532, 3, 9, 65533, 3, 9, 65534, 3, 9, 65535, 3, 9, 0, 3, 9, 1, 3, 9, 2, 3, 9, 3, 3, 9, 4, 3, 9, 5, 3, 9, 6, 3, 9, 7, 3, 9, 8, 3, 9, 9, 3, 9, 10, 3, 9, 11, 3, 9, 12, 3, 9, 13, 3, 9, 14, 3, 9, 15, 3, 9, 16, 3, 9, 65550, 3, 9, 65549, 3, 9, 65548, 3, 9, 65547, 3, 9, 131083, 3, 9, 131082, 3, 9, 131081, 3, 9, 131080, 3, 9, 131079, 3, 9, 131078, 3, 9, 131077, 3, 9, 131076, 3, 9, 131075, 3, 9, 131074, 3, 9, 131073, 3, 9, 131072, 3, 9, 196607, 3, 9, 196606, 3, 9, 196605, 3, 9, 196604, 3, 9, 196603, 3, 9, 196602, 3, 9, 196601, 3, 9, 196600, 3, 9, 196599, 3, 9, 131063, 3, 9, 131062, 3, 9, 131061, 3, 9, 131060, 3, 9, 131059, 3, 9, 131058, 3, 9, 196598, 3, 9, 196597, 3, 9, 131064, 3, 9, 131065, 3, 9, 131066, 3, 9, 131067, 3, 9, 131068, 3, 9, 131069, 3, 9, 131070, 3, 9, 131071, 3, 9, 65536, 3, 9, 65537, 3, 9, 65538, 3, 9, 65539, 3, 9, 65540, 3, 9, 65541, 3, 9, 65542, 3, 9, 65543, 3, 9, 65544, 3, 9, 65545, 3, 9, 65546, 3, 9, 131054, 3, 9, 131055, 3, 9, -393206, 3, 9, -458742, 3, 9, -458741, 3, 9, -393205, 3, 9, -524277, 3, 9, -589813, 3, 9, -655349, 3, 9, -720885, 3, 9, -786421, 3, 9, -786422, 3, 9, -720886, 3, 9, -655350, 3, 9, -589814, 3, 9, -524278, 3, 9, -327687, 589827, 4, -393228, 589827, 4, -262150, 327683, 4, -327691, 327683, 4, -327681, 3, 9)
+layer_0/tile_data = PackedInt32Array(-262149, 3, 10, -262148, 262147, 9, -262147, 327683, 9, -262146, 393219, 9, -262145, 65539, 1342177290, -131070, 720899, 9, -65534, 3, 9, -131069, 786435, 9, -65533, 3, 9, -131068, 851971, 9, -65532, 3, 9, -131067, 917507, 9, -65531, 3, 9, -131066, 983043, 9, -65530, 3, 9, -65548, 393219, 9, -12, 3, 9, -65547, 262147, 9, -11, 3, 9, -65546, 327683, 9, -10, 3, 9, -65545, 393219, 9, -9, 3, 9, -65544, 458755, 9, -8, 3, 9, -65543, 524291, 9, -7, 3, 9, -65542, 589827, 9, -6, 3, 9, -196613, 3, 1610612746, -65541, 655363, 9, -5, 3, 9, -196612, 327683, 805306377, -65540, 327683, 9, -4, 3, 9, -196611, 262147, 805306377, -65539, 393219, 9, -3, 3, 9, -196610, 262147, 805306377, -65538, 262147, 9, -2, 3, 9, -196609, 3, 805306378, -65537, 327683, 9, -1, 3, 9, -131072, 393219, 9, -65536, 3, 9, -131071, 262147, 9, -65535, 3, 9, -524285, 3, 10, -458749, 65539, 1610612746, -524284, 327683, 9, -458748, 327683, 805306377, -524283, 262147, 9, -458747, 393219, 805306377, -524282, 327683, 9, -458746, 327683, 805306377, -524281, 65539, 1342177290, -458745, 65539, 805306378, -131065, 1048579, 9, -65529, 3, 9, -131064, 327683, 9, -65528, 3, 9, -131063, 393219, 9, -65527, 3, 9, -13, 3, 9, -65549, 327683, 9, -65550, 262147, 9, -14, 3, 9, -15, 3, 9, -65551, 393219, 9, -65552, 327683, 9, -16, 3, 9, -17, 3, 9, -65553, 262147, 9, -65554, 3, 9, -18, 3, 9, -393234, 3, 9, -327698, 3, 9, -262162, 262147, 1342177289, -196626, 327683, 1342177289, -131090, 393219, 1342177289, -327697, 393219, 805306377, -327696, 393219, 805306377, -327695, 327683, 805306377, -327694, 262147, 805306377, -327693, 65539, 805306378, -393233, 3, 9, -393232, 3, 9, -393231, 262147, 9, -393230, 327683, 9, -393229, 3, 1342177290, -327689, 327683, 9, -327688, 65539, 1342177290, -19, 262147, 1610612745, -65555, 327683, 1610612745, -131091, 393219, 1610612745, -196627, 262147, 1610612745, -262163, 262147, 1610612745, -327699, 327683, 1610612745, -393235, 393219, 1610612745, -327690, 3, 10, -262154, 65539, 1610612746, -262153, 262147, 805306377, -262152, 65539, 805306378, -65525, 3, 9, -131061, 65539, 9, -131062, 262147, 9, -65526, 3, 9, -65524, 3, 9, -65523, 3, 9, -65522, 3, 9, -65521, 3, 9, -65520, 3, 9, -65519, 3, 9, -65518, 3, 9, -131054, 393219, 9, -131055, 327683, 9, -131056, 786435, 9, -131057, 393219, 9, -131058, 327683, 9, -131059, 196611, 9, -131060, 131075, 9, -65517, 3, 9, -131053, 262147, 9, -131052, 327683, 9, -65516, 3, 9, -65515, 3, 9, -131051, 917507, 9, -131050, 327683, 9, -65514, 3, 9, -65513, 65539, 805306378, -131049, 3, 1342177290, 22, 3, 805306378, 21, 262147, 805306377, 20, 262147, 805306377, 19, 327683, 805306377, 18, 393219, 805306377, 17, 3, 9, 65553, 65539, 805306378, 65552, 262147, 805306377, 65551, 3, 9, 131087, 3, 805306378, 131086, 262147, 805306377, 131085, 262147, 805306377, 131084, 3, 9, 196620, 3, 805306378, 196619, 262147, 805306377, 196618, 327683, 805306377, 196617, 393219, 805306377, 196616, 327683, 805306377, 196615, 393219, 805306377, 196614, 327683, 805306377, 196613, 393219, 805306377, 196612, 262147, 805306377, 196611, 327683, 805306377, 196610, 393219, 805306377, 196609, 262147, 805306377, 196608, 327683, 805306377, 262143, 393219, 805306377, 262142, 262147, 805306377, 262141, 327683, 805306377, 262140, 393219, 805306377, 262139, 262147, 805306377, 262138, 327683, 805306377, 262137, 393219, 805306377, 262136, 262147, 805306377, 262135, 327683, 805306377, 262134, 393219, 805306377, 262133, 65539, 1610612746, 196596, 262147, 805306377, 196595, 327683, 805306377, 196594, 393219, 805306377, 196593, 65539, 1610612746, 131057, 3, 9, 131056, 262147, 805306377, 65520, 3, 9, 65519, 3, 9, 65518, 3, 9, 65517, 65539, 1610612746, 65521, 3, 9, 65522, 3, 9, 65523, 3, 9, 65524, 3, 9, 65525, 3, 9, 65526, 3, 9, 65527, 3, 9, 65528, 3, 9, 65529, 3, 9, 65530, 3, 9, 65531, 3, 9, 65532, 3, 9, 65533, 3, 9, 65534, 3, 9, 65535, 3, 9, 0, 3, 9, 1, 3, 9, 2, 3, 9, 3, 3, 9, 4, 3, 9, 5, 3, 9, 6, 3, 9, 7, 3, 9, 8, 3, 9, 9, 3, 9, 10, 3, 9, 11, 3, 9, 12, 3, 9, 13, 3, 9, 14, 3, 9, 15, 3, 9, 16, 3, 9, 65550, 3, 9, 65549, 3, 9, 65548, 3, 9, 65547, 3, 9, 131083, 3, 9, 131082, 3, 9, 131081, 3, 9, 131080, 3, 9, 131079, 3, 9, 131078, 3, 9, 131077, 3, 9, 131076, 3, 9, 131075, 3, 9, 131074, 3, 9, 131073, 3, 9, 131072, 3, 9, 196607, 3, 9, 196606, 3, 9, 196605, 3, 9, 196604, 3, 9, 196603, 3, 9, 196602, 3, 9, 196601, 3, 9, 196600, 3, 9, 196599, 3, 9, 131063, 3, 9, 131062, 3, 9, 131061, 3, 9, 131060, 3, 9, 131059, 3, 9, 131058, 3, 9, 196598, 3, 9, 196597, 3, 9, 131064, 3, 9, 131065, 3, 9, 131066, 3, 9, 131067, 3, 9, 131068, 3, 9, 131069, 3, 9, 131070, 3, 9, 131071, 3, 9, 65536, 3, 9, 65537, 3, 9, 65538, 3, 9, 65539, 3, 9, 65540, 3, 9, 65541, 3, 9, 65542, 3, 9, 65543, 3, 9, 65544, 3, 9, 65545, 3, 9, 65546, 3, 9, 131054, 3, 1610612746, 131055, 262147, 805306377, -393206, 65539, 1610612746, -458742, 327683, 1610612745, -458741, 327683, 1342177289, -393205, 65539, 805306378, -524277, 262147, 1342177289, -589813, 393219, 1342177289, -655349, 327683, 1342177289, -720885, 262147, 1342177289, -786421, 3, 1342177290, -786422, 3, 10, -720886, 327683, 1610612745, -655350, 262147, 1610612745, -589814, 262147, 1610612745, -524278, 393219, 1610612745, -327687, 589827, 4, -393228, 589827, 4, -262150, 327683, 4, -327691, 327683, 4, -327681, 393219, 1073741828, -458771, 65539, 10, -458770, 262147, 9, -458769, 327683, 9, -458768, 65539, 1342177290, -786420, 262147, 1342177283, -720884, 327683, 1342177283, -655348, 393219, 1342177283, -589812, 458755, 1342177283, -524276, 524291, 1342177283, -458740, 589827, 1342177283, -393204, 655363, 1342177283, -786423, 655363, 1610612739, -720887, 589827, 1610612739, -655351, 524291, 1610612739, -589815, 458755, 1610612739, -524279, 393219, 1610612739, -458743, 327683, 1610612739, -393207, 262147, 1610612739, -851958, 327683, 3, -851957, 393219, 3, -327669, 327683, 805306371, -327670, 393219, 805306371, -262158, 196611, 0, -262160, 65539, 0)
 layer_1/name = "Env1"
 layer_1/z_index = 4
 layer_1/navigation_enabled = false
-layer_1/tile_data = PackedInt32Array(-655354, 262147, 0, -589818, 262147, 1, -655353, 327683, 0, -589817, 327683, 1, -458762, 262147, 5, -393226, 262147, 6, -458761, 327683, 5, -393225, 327683, 6, -458760, 393219, 5, -393224, 393219, 6, -196604, 458755, 6, -196603, 524291, 6, -262138, 589827, 5, -196602, 589827, 6, -262137, 655363, 5, -196601, 655363, 6, -196600, 720899, 6, -589809, 720899, 2, -524273, 720899, 3, -458737, 720899, 4, -655344, 786435, 1, -589808, 786435, 2, -524272, 786435, 3, -458736, 786435, 4, -393200, 786435, 5, -327664, 786435, 6, -196592, 786435, 8, -720879, 851971, 0, -655343, 851971, 1, -589807, 851971, 2, -524271, 851971, 3, -458735, 851971, 4, -393199, 851971, 5, -327663, 851971, 6, -262127, 851971, 7, -196591, 851971, 8, -720878, 917507, 0, -655342, 917507, 1, -589806, 917507, 2, -524270, 917507, 3, -458734, 917507, 4, -393198, 917507, 5, -327662, 917507, 6, -262126, 917507, 7, -196590, 917507, 8, -655341, 983043, 1, -589805, 983043, 2, -524269, 983043, 3, -458733, 983043, 4, -393197, 983043, 5, -327661, 983043, 6, -196589, 983043, 8, -589804, 1048579, 2, -524268, 1048579, 3, -196588, 1048579, 8, -720877, 983043, 0, -262125, 983043, 7, -655340, 1048579, 1, -458732, 1048579, 4, -393196, 1048579, 5, -327660, 1048579, 6, -589803, 1114115, 2, -524267, 1114115, 3, -196587, 1114115, 8)
+layer_1/tile_data = PackedInt32Array(-589818, 327683, 3, -458762, 262147, 5, -393226, 262147, 6, -458761, 327683, 5, -393225, 327683, 6, -458760, 393219, 5, -393224, 393219, 6, -262137, 655363, 5, -131089, 3, 1342177283, -131088, 327683, 3, -131087, 393219, 3, -131086, 458755, 3, -131085, 524291, 3, -131084, 589827, 3, -131083, 655363, 3, -131082, 262147, 3, -131081, 327683, 3, -131080, 393219, 3, -131079, 458755, 3, -131078, 524291, 3, -131077, 589827, 3, -131076, 655363, 3, -131075, 262147, 3, -131074, 327683, 3, -131073, 393219, 3, -196608, 458755, 3, -196607, 524291, 3, -196606, 589827, 3, -196605, 655363, 3, -196591, 262147, 3, -196590, 327683, 3, -196589, 393219, 3, -196588, 458755, 3, -196587, 524291, 3, -196586, 589827, 3, -196585, 655363, 3, -196599, 262147, 3, -196598, 327683, 3, -196597, 393219, 3, -196596, 458755, 3, -196595, 524291, 3, -196594, 589827, 3, -196593, 655363, 3, -327685, 262147, 3, -327684, 327683, 3, -327683, 262147, 3, -327682, 327683, 3, -458766, 327683, 3, -458765, 327683, 3, -458767, 65539, 1342177283, -524305, 262147, 3, -524304, 327683, 3, -524307, 262147, 3, -524306, 327683, 3, -65556, 393219, 1610612739, -131092, 458755, 1610612739, -196628, 524291, 1610612739, -262164, 589827, 1610612739, -327700, 655363, 1610612739, -393236, 589827, 1610612739, -458772, 655363, 1610612739, 65516, 262147, 1610612739, -20, 327683, 1610612739, 327676, 262147, 805306371, 327675, 262147, 805306371, 327674, 327683, 805306371, 327673, 393219, 805306371, 327672, 458755, 805306371, 327671, 524291, 805306371, 327670, 589827, 805306371, 327669, 655363, 805306371, 262147, 262147, 805306371, 262146, 327683, 805306371, 262145, 393219, 805306371, 262144, 458755, 805306371, 327679, 524291, 805306371, 327678, 589827, 805306371, 327677, 655363, 805306371, 262154, 393219, 805306371, 262153, 458755, 805306371, 262152, 524291, 805306371, 262151, 589827, 805306371, 262150, 655363, 805306371, 262149, 589827, 805306371, 262148, 655363, 805306371, 262156, 262147, 805306371, 262155, 327683, 805306371, 65558, 393219, 805306371, 65557, 458755, 805306371, 65556, 524291, 805306371, 65555, 589827, 805306371, 65554, 655363, 805306371, 196622, 655363, 805306371, 196621, 655363, 805306371, 196623, 589827, 805306371, 131089, 589827, 805306371, 131088, 655363, 805306371, 23, 655363, 805306371, 262132, 589827, 805306371, 262131, 655363, 805306371, 262130, 589827, 805306371, 262129, 655363, 805306371, 196591, 655363, 805306371, 196590, 655363, 805306371, 196592, 589827, 805306371, 131053, 589827, 805306371, -262160, 458755, 805306371, -262161, 3, 805306371, -262158, 524291, 805306371, -262159, 524291, 805306371, -262157, 458755, 805306371, -196625, 524291, 1342177283, -196617, 393219, 805306371, -196618, 393219, 805306371, -196616, 327683, 805306371, -327691, 393219, 1610612739, -262155, 327683, 1610612739, -327687, 327683, 1342177283, -262151, 393219, 1342177283, -327680, 327683, 1342177283, -262144, 393219, 1342177283, -262150, 393219, 1610612739, -196614, 327683, 1610612739, -524286, 393219, 1610612739, -458750, 327683, 1610612739, -589820, 393219, 3, -589821, 327683, 3, -589819, 327683, 3, -589817, 393219, 3, -524280, 327683, 1342177283, -458744, 393219, 1342177283)
 layer_2/name = "Env2"
 layer_2/z_index = 5
 layer_2/navigation_enabled = false
+layer_2/tile_data = PackedInt32Array(-196604, 458755, 6, -196603, 524291, 6, -262138, 589827, 5, -196602, 589827, 6, -262137, 655363, 5, -196601, 655363, 6, -196600, 720899, 6, -327683, 327683, 2, -458766, 393219, 2, -524307, 524291, 2, -131087, 327683, 2, -131080, 524291, 2, -196595, 393219, 2, -196586, 262147, 268435458, -393212, 3, 0, -327676, 3, 1, -393210, 65539, 0, -393211, 196611, 0, -393209, 196611, 0, -393213, 196611, 0, -131077, 196611, 0, -131074, 196611, 0, -131075, 393219, 805306371, -131076, 393219, 805306371, -131073, 393219, 805306371, -655354, 262147, 0, -589818, 262147, 1, -655353, 327683, 0, -589817, 327683, 1)
 layer_3/name = "BackEnv"
 layer_3/z_index = -10
 layer_3/navigation_enabled = false
+layer_3/tile_data = PackedInt32Array(-589809, 720899, 2, -524273, 720899, 3, -458737, 720899, 4, -655344, 786435, 1, -589808, 786435, 2, -524272, 786435, 3, -458736, 786435, 4, -393200, 786435, 5, -327664, 786435, 6, -196592, 786435, 8, -720879, 851971, 0, -655343, 851971, 1, -589807, 851971, 2, -524271, 851971, 3, -458735, 851971, 4, -393199, 851971, 5, -327663, 851971, 6, -262127, 851971, 7, -196591, 851971, 8, -720878, 917507, 0, -655342, 917507, 1, -589806, 917507, 2, -524270, 917507, 3, -458734, 917507, 4, -393198, 917507, 5, -327662, 917507, 6, -262126, 917507, 7, -196590, 917507, 8, -720877, 983043, 0, -655341, 983043, 1, -589805, 983043, 2, -524269, 983043, 3, -458733, 983043, 4, -393197, 983043, 5, -327661, 983043, 6, -262125, 983043, 7, -196589, 983043, 8, -655340, 1048579, 1, -589804, 1048579, 2, -524268, 1048579, 3, -458732, 1048579, 4, -393196, 1048579, 5, -327660, 1048579, 6, -196588, 1048579, 8, -589803, 1114115, 2, -524267, 1114115, 3, -196587, 1114115, 8)
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_psxy2")]
 
+[node name="UIState" parent="." instance=ExtResource("6_0xt02")]
+
 [node name="Background" parent="." instance=ExtResource("6_wwdpc")]
 
-[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("aggro_area")]
+[node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("zones") groups=["enemy"]]
 position = Vector2(-248, -36)
 script = ExtResource("7_nc7oo")
-aggro_area = NodePath("../Area2D")
 speed = 60.0
 gravity = 1250.0
+zones = [NodePath("../AgrArea/Area2D"), NodePath("../AgrArea/Area2D2"), NodePath("../AgrArea/Area2D3"), NodePath("../AgrArea/Area2D4"), NodePath("../AgrArea/Area2D5")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2(-0.5, -2)
@@ -438,70 +464,146 @@ shape = SubResource("RectangleShape2D_6x3wt")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy"]
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, -48)
+[node name="Box" parent="." instance=ExtResource("13_00xh1")]
+position = Vector2(-275, -139)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-232, -8)
-shape = SubResource("RectangleShape2D_8tfmj")
+[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("ui", "pause_manager")]
+position = Vector2(302, -61)
+script = ExtResource("10_jw1dd")
+level_id = 2
+ui = NodePath("../UIState")
+pause_manager = NodePath("../PauseMenu")
 
-[node name="Button" parent="." instance=ExtResource("9_46pvi")]
-position = Vector2(-140, -32)
+[node name="Timer" type="Timer" parent="FinishZone"]
+one_shot = true
 
-[node name="Platform" parent="." instance=ExtResource("10_fvkd4")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishZone"]
+position = Vector2(-4.5, -7)
+shape = SubResource("RectangleShape2D_q0xi3")
+
+[node name="CountdownLabel" type="Label" parent="FinishZone"]
+offset_left = 61.0
+offset_top = -35.0
+offset_right = 93.0
+offset_bottom = -19.0
+label_settings = SubResource("LabelSettings_nwnlh")
+metadata/_edit_use_anchors_ = true
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("10_fvkd4")]
 position = Vector2(-16, -56)
 move_distance = 20.0
 move_speed = 100.0
 
-[node name="Platform2" parent="." instance=ExtResource("11_pj4lr")]
+[node name="Platform2" parent="Platforms" instance=ExtResource("11_pj4lr")]
 position = Vector2(64, -104)
 move_distance = -25.0
 move_speed = 100.0
 
-[node name="Platform3" parent="." instance=ExtResource("12_pj4lr")]
+[node name="Platform3" parent="Platforms" instance=ExtResource("12_pj4lr")]
 position = Vector2(-195, -64)
 move_distance = -64.0
 move_speed = 100.0
 horizontal_move = false
 
-[node name="Box" parent="." instance=ExtResource("13_00xh1")]
-position = Vector2(-233, -121)
-
-[node name="Platform4" parent="." instance=ExtResource("12_pj4lr")]
+[node name="Platform4" parent="Platforms" instance=ExtResource("12_pj4lr")]
 position = Vector2(163, -64)
-rotation = 3.1415927
+rotation = -3.1415925
 move_distance = -64.0
 move_speed = 150.0
 horizontal_move = false
 
-[node name="Button2" parent="." instance=ExtResource("9_46pvi")]
-position = Vector2(-67, -80)
-
-[node name="Button3" parent="." instance=ExtResource("9_46pvi")]
-position = Vector2(-23, -32)
-
-[node name="Platform5" parent="." instance=ExtResource("12_pj4lr")]
+[node name="Platform5" parent="Platforms" instance=ExtResource("12_pj4lr")]
 position = Vector2(-3, 0)
 move_distance = -16.0
 move_speed = 100.0
 horizontal_move = false
 
-[node name="Platform6" parent="." instance=ExtResource("12_pj4lr")]
+[node name="Platform6" parent="Platforms" instance=ExtResource("12_pj4lr")]
 position = Vector2(-77, 0)
-rotation = 3.1415927
+rotation = -3.1415925
 move_distance = -16.0
 move_speed = 100.0
 horizontal_move = false
 
-[connection signal="pressed" from="Button" to="Platform" method="button_pressed"]
-[connection signal="pressed" from="Button" to="Platform2" method="button_pressed"]
-[connection signal="released" from="Button" to="Platform" method="button_released"]
-[connection signal="released" from="Button" to="Platform2" method="button_released"]
-[connection signal="pressed" from="Button2" to="Platform5" method="button_pressed"]
-[connection signal="pressed" from="Button2" to="Platform6" method="button_pressed"]
-[connection signal="released" from="Button2" to="Platform5" method="button_released"]
-[connection signal="released" from="Button2" to="Platform6" method="button_released"]
-[connection signal="pressed" from="Button3" to="Platform3" method="button_pressed"]
-[connection signal="pressed" from="Button3" to="Platform4" method="button_pressed"]
-[connection signal="released" from="Button3" to="Platform3" method="button_released"]
-[connection signal="released" from="Button3" to="Platform4" method="button_released"]
+[node name="Buttons" type="Node" parent="."]
+
+[node name="Button" parent="Buttons" instance=ExtResource("9_46pvi")]
+position = Vector2(-140, -32)
+
+[node name="Button2" parent="Buttons" instance=ExtResource("9_46pvi")]
+position = Vector2(-67, -80)
+
+[node name="Button3" parent="Buttons" instance=ExtResource("9_46pvi")]
+position = Vector2(-27, -32)
+
+[node name="AgrArea" type="Node" parent="."]
+
+[node name="Area2D" type="Area2D" parent="AgrArea"]
+visible = false
+position = Vector2(0, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AgrArea/Area2D"]
+position = Vector2(-232, -8)
+shape = SubResource("RectangleShape2D_8tfmj")
+
+[node name="Area2D2" type="Area2D" parent="AgrArea"]
+visible = false
+position = Vector2(0, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AgrArea/Area2D2"]
+position = Vector2(-136, -5)
+shape = SubResource("RectangleShape2D_pj4lr")
+
+[node name="Area2D3" type="Area2D" parent="AgrArea"]
+visible = false
+position = Vector2(0, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AgrArea/Area2D3"]
+position = Vector2(-40, 8)
+shape = SubResource("RectangleShape2D_00xh1")
+
+[node name="Area2D4" type="Area2D" parent="AgrArea"]
+visible = false
+position = Vector2(0, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AgrArea/Area2D4"]
+position = Vector2(80, -16)
+shape = SubResource("RectangleShape2D_jw1dd")
+
+[node name="Area2D5" type="Area2D" parent="AgrArea"]
+visible = false
+position = Vector2(0, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AgrArea/Area2D5"]
+position = Vector2(272, -16)
+shape = SubResource("RectangleShape2D_0xt02")
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("14_00xh1")]
+position = Vector2(-177, -77)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("14_00xh1")]
+position = Vector2(-280, -190.99998)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("14_00xh1")]
+position = Vector2(144, -110)
+
+[connection signal="pressed" from="Buttons/Button" to="Platforms/Platform" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button" to="Platforms/Platform2" method="button_pressed"]
+[connection signal="released" from="Buttons/Button" to="Platforms/Platform" method="button_released"]
+[connection signal="released" from="Buttons/Button" to="Platforms/Platform2" method="button_released"]
+[connection signal="pressed" from="Buttons/Button2" to="Platforms/Platform5" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button2" to="Platforms/Platform6" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button2" to="Enemy" method="close_doors" binds= [[1, 2]]]
+[connection signal="released" from="Buttons/Button2" to="Platforms/Platform5" method="button_released"]
+[connection signal="released" from="Buttons/Button2" to="Platforms/Platform6" method="button_released"]
+[connection signal="released" from="Buttons/Button2" to="Enemy" method="open_doors" binds= [[1, 2]]]
+[connection signal="pressed" from="Buttons/Button3" to="Platforms/Platform3" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button3" to="Platforms/Platform4" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button3" to="Enemy" method="open_doors" binds= [[0, 3]]]
+[connection signal="released" from="Buttons/Button3" to="Platforms/Platform3" method="button_released"]
+[connection signal="released" from="Buttons/Button3" to="Platforms/Platform4" method="button_released"]
+[connection signal="released" from="Buttons/Button3" to="Enemy" method="close_doors" binds= [[0, 3]]]

@@ -27,6 +27,7 @@ ServerSync="*res://scripts/ServerSync.gd"
 box=""
 level_timer=""
 collectible=""
+enemy=""
 
 [input]
 

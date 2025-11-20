@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=19 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://player_1.tscn" id="2_1bjei"]
@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://platform.tscn" id="11_5g1s2"]
 [ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://platformR.tscn" id="12_3gjqj"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="12_wapi5"]
+[ext_resource type="PackedScene" uid="uid://boya426tynkqh" path="res://ui_state.tscn" id="14_3gjqj"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://box.tscn" id="14_a2cb0"]
-[ext_resource type="Texture2D" uid="uid://bomucl4gqreiq" path="res://assets/coin.png" id="15_g56ap"]
 [ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="16_g56ap"]
 [ext_resource type="PackedScene" uid="uid://cn0jxdh68opny" path="res://pause_menu.tscn" id="16_na6ls"]
 
@@ -197,10 +197,6 @@ size = Vector2(109, 72)
 [sub_resource type="LabelSettings" id="LabelSettings_g56ap"]
 font = ExtResource("12_wapi5")
 
-[sub_resource type="LabelSettings" id="LabelSettings_aiv1b"]
-font = ExtResource("12_wapi5")
-font_size = 54
-
 [node name="Level1" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
@@ -278,11 +274,11 @@ position = Vector2(-288, -39)
 move_distance = -25.0
 move_speed = 100.0
 
-[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("level_timer_label", "coins_label")]
+[node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("ui", "pause_manager")]
 position = Vector2(-484, -125)
 script = ExtResource("16_g56ap")
-level_timer_label = NodePath("../CanvasLayer/Control/HBoxContainer/LevelTimerLabel")
-coins_label = NodePath("../CanvasLayer/Control/HBoxContainer/CoinsLabel")
+ui = NodePath("../UIState")
+pause_manager = NodePath("../PauseMenu")
 
 [node name="Timer" type="Timer" parent="FinishZone"]
 one_shot = true
@@ -300,42 +296,7 @@ label_settings = SubResource("LabelSettings_g56ap")
 
 [node name="PauseMenu" parent="." instance=ExtResource("16_na6ls")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchor_top = 0.02
-anchor_right = 1.0
-anchor_bottom = 0.15
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -131.0
-offset_right = 131.0
-offset_bottom = 55.0
-grow_horizontal = 2
-theme_override_constants/separation = 100
-
-[node name="LevelTimerLabel" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
-layout_mode = 2
-text = "00:00"
-label_settings = SubResource("LabelSettings_aiv1b")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control/HBoxContainer"]
-position = Vector2(289, 27)
-scale = Vector2(3, 3)
-texture = ExtResource("15_g56ap")
-hframes = 6
-
-[node name="CoinsLabel" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
-layout_mode = 2
-text = "0"
-label_settings = SubResource("LabelSettings_aiv1b")
+[node name="UIState" parent="." instance=ExtResource("14_3gjqj")]
 
 [connection signal="pressed" from="Button" to="Platform" method="button_pressed"]
 [connection signal="released" from="Button" to="Platform" method="button_released"]

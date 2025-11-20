@@ -22,18 +22,18 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		players_in_range.append(body)
 
-	if body.is_in_group("box"):
+	if body.is_in_group("box") or body.is_in_group("enemy"):
 		boxes_in_range.append(body)
-		# Ящик автоматически нажимает кнопку
 		if not pressed_down:
 			_press_button()
+
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):
 		players_in_range.erase(body)
 		_check_release()
 
-	if body.is_in_group("box"):
+	if body.is_in_group("box") or body.is_in_group("enemy"):
 		boxes_in_range.erase(body)
 		_check_release()
 
