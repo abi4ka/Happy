@@ -54,6 +54,11 @@ func _physics_process(delta):
 			velocity.x = 0
 			_play_anim("attack")
 
+			if target != null:
+				if target.has_method("die"):
+					target.die()
+
+
 	move_and_slide()
 
 func update_enemy_room():

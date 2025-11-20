@@ -24,6 +24,12 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
+		
+	if is_dying:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
 	if is_pushing:
 		velocity.x = 0
 		move_and_slide()
@@ -78,3 +84,16 @@ func _push_bodies():
 			push_dir.y = 0
 			var force = push_dir * speed / 2
 			collider.apply_central_impulse(force)
+
+var is_dying = false
+
+func die():
+	if is_dying:
+		return
+	is_dying = true
+
+	anim.play("die")
+	get_tree().create_timer(2.0).timeout.connect(_restart_level)
+
+func _restart_level():
+	get_tree().reload_current_scene()
