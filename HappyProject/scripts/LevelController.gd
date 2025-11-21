@@ -146,7 +146,7 @@ func finish_level():
 
 	var saved_coins = saved_data.coins
 	var saved_time = saved_data.best_time
-
+	
 	print("==================== LEVEL FINISHED ====================")
 	print(" Level:", level_id)
 	print(" Current coins:", total_collected)
@@ -168,5 +168,5 @@ func finish_level():
 
 	else:
 		print(" → NO UPDATE: fewer coins.")
-
 	print("==========================================================")
+	PlayersLoader.send_player_to_server()
