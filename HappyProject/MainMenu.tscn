@@ -248,7 +248,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_iwfq2")
 text = "Data sync"
 
 [node name="SettingsPanel" type="PanelContainer" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -263,6 +262,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_mae5d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/SettingsPanel"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/SettingsPanel/VBoxContainer"]
 layout_mode = 2
@@ -287,6 +287,24 @@ theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
 text = "Apply"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/SettingsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Fullscreen mode: "
+label_settings = SubResource("LabelSettings_mae5d")
+
+[node name="FullscreenButton" type="Button" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cqjrg")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
+text = "OFF
+"
 
 [node name="Panel" type="Panel" parent="Control/SettingsPanel"]
 layout_mode = 2

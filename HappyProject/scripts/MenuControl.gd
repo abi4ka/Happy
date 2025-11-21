@@ -7,6 +7,7 @@ extends Control
 @onready var name_label     = $UserNamePanel/UserNameLabel
 
 @onready var name_input = $SettingsPanel/VBoxContainer/HBoxContainer/NameInput
+@onready var fullscreen_button = $SettingsPanel/VBoxContainer/HBoxContainer2/FullscreenButton
 var toggle_panels: Array[Control]
 
 func _ready():
@@ -31,6 +32,9 @@ func _ready():
 	
 	$LevelsPanel/VBoxContainer/ButtonLvl1.pressed.connect(_on_lvl1_pressed)
 	$LevelsPanel/VBoxContainer/ButtonLvl2.pressed.connect(_on_lvl1_pressed)
+	
+	fullscreen_button.pressed.connect(_on_fullscreen_toggled)
+	_update_fullscreen_text()
 
 	name_label.text = PlayerData.player_name
 
@@ -76,3 +80,22 @@ func _on_lvl1_pressed():
 
 func _on_lvl2_pressed():
 	get_tree().change_scene_to_file("res://Level2.tscn")
+	
+func _on_fullscreen_toggled():
+
+	var is_fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+
+	if is_fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+	_update_fullscreen_text()
+
+
+func _update_fullscreen_text():
+	var is_fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	if is_fullscreen:
+		fullscreen_button.text = "ON"
+	else:
+		fullscreen_button.text = "OFF"
