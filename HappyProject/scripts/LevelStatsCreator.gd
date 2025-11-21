@@ -1,58 +1,68 @@
 extends Control
 
-@export var level_id := 1
 @export var entry_prefab: PackedScene
 @export var list_container: VBoxContainer
 @export var sync_button: Button
 
-func _ready():
+func _ready() -> void:
 	sync_button.pressed.connect(_on_sync_pressed)
 	update_leaderboard()
 
 
-func update_leaderboard():
+func update_leaderboard() -> void:
 	for child in list_container.get_children():
 		child.queue_free()
 
+	var players: Array = PlayersLoader.load_all_players() as Array
+	var total_stats: Array = []
 
-	var players = PlayersLoader.load_all_players()
+	for p_variant in players:
+		var p: Dictionary = p_variant as Dictionary
 
-	var level_stats = []
+		var name: String = str(p.get("name", "???"))
+		var levels: Array = p.get("levels", []) as Array
 
-	for p in players:
-		for lvl in p.get("levels", []):
-			if int(lvl["lvl_id"]) == level_id:
-				level_stats.append({
-					"name": p.get("name", "???"),
-					"coins": int(lvl.get("coins", 0)),
-					"best_time": lvl.get("best_time", 9999999)
-				})
-	
-	level_stats = _sort_level_stats_by_keys(level_stats)
+		var total_coins: int = 0
+		var total_time: float = 0.0
 
-	var rank := 1
-	for s in level_stats:
-		var entry = entry_prefab.instantiate()
-		entry.set_data(rank, s.name, s.coins, s.best_time)
+		for lvl_variant in levels:
+			var lvl: Dictionary = lvl_variant as Dictionary
+			total_coins += int(lvl.get("coins", 0))
+			total_time += float(lvl.get("best_time", 0.0))
+
+		total_stats.append({
+			"name": name,
+			"coins": total_coins,
+			"time": total_time
+		})
+
+	total_stats = _sort_stats(total_stats)
+
+	var rank: int = 1
+	for s in total_stats:
+		var entry: Node = entry_prefab.instantiate()
+		entry.set_data(rank, s["name"], s["coins"], s["time"])
 		list_container.add_child(entry)
 		rank += 1
 
-func _sort_level_stats_by_keys(arr: Array) -> Array:
-	var tuples := []
+
+func _sort_stats(arr: Array) -> Array:
+	var tuples: Array = []
 	for item in arr:
-		var coins := -int(item.get("coins", 0))
-		var time := float(item.get("best_time", 9999999.0))
+		var coins: int = -int(item.get("coins", 0))
+		var time: float = float(item.get("time", 0.0))
 		tuples.append([coins, time, item])
 	tuples.sort()
-	var out := []
+	var out: Array = []
 	for t in tuples:
 		out.append(t[2])
 	return out
 
 
-func _on_sync_pressed():
+func _on_sync_pressed() -> void:
 	PlayersLoader.send_player_to_server()
 	PlayersLoader.fetch_all_players_from_server(self, "_on_players_fetched")
 
-func _on_players_fetched():
+
+func _on_players_fetched() -> void:
 	update_leaderboard()
