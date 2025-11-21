@@ -30,6 +30,7 @@ func _ready():
 	$SettingsPanel/VBoxContainer/HBoxContainer/Apply.pressed.connect(_on_apply_name_pressed)
 	
 	$LevelsPanel/VBoxContainer/ButtonLvl1.pressed.connect(_on_lvl1_pressed)
+	$LevelsPanel/VBoxContainer/ButtonLvl2.pressed.connect(_on_lvl1_pressed)
 
 	name_label.text = PlayerData.player_name
 
@@ -72,3 +73,6 @@ func _on_apply_name_pressed():
 
 func _on_lvl1_pressed():
 	get_tree().change_scene_to_file("res://Level1.tscn")
+
+func _on_lvl2_pressed():
+	get_tree().change_scene_to_file("res://Level2.tscn")
