@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://boya426tynkqh"]
 
 [ext_resource type="Script" uid="uid://beopib4aluldf" path="res://scripts/UIState.gd" id="1_8t8f2"]
-[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="2_fnjtt"]
+[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://assets/FreePixel.ttf" id="2_fnjtt"]
 [ext_resource type="Texture2D" uid="uid://bomucl4gqreiq" path="res://assets/coin.png" id="3_ehhkb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aiv1b"]

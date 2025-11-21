@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5gudnpthoug7"]
 
 [ext_resource type="Script" uid="uid://dhedpygpbt078" path="res://scripts/LevelStatEntry.gd" id="1_4qywg"]
-[ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="2_yeqx8"]
+[ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://assets/menuText.tres" id="2_yeqx8"]
 
 [node name="LevelStatEntry" type="HBoxContainer" node_paths=PackedStringArray("label_rank", "label_name", "label_coins", "label_time")]
 theme_override_constants/separation = 25

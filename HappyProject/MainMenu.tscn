@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://xynq5he18fh6"]
 
 [ext_resource type="Script" uid="uid://c7qn3aaspc7mp" path="res://scripts/MenuControl.gd" id="1_iwfq2"]
-[ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://menuText.tres" id="2_7r1g0"]
-[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="3_cqjrg"]
+[ext_resource type="LabelSettings" uid="uid://bsk47r4n4k72r" path="res://assets/menuText.tres" id="2_7r1g0"]
+[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://assets/FreePixel.ttf" id="3_cqjrg"]
 [ext_resource type="Script" uid="uid://cnl2xdbs5jy70" path="res://scripts/LevelStatsCreator.gd" id="4_e2xy7"]
-[ext_resource type="PackedScene" uid="uid://5gudnpthoug7" path="res://LevelStatEntry.tscn" id="5_fimr5"]
+[ext_resource type="PackedScene" uid="uid://5gudnpthoug7" path="res://prefabs/LevelStatEntry.tscn" id="5_fimr5"]
 [ext_resource type="PackedScene" uid="uid://c6so6fcx41rb5" path="res://background.tscn" id="6_7r1g0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytr4m"]

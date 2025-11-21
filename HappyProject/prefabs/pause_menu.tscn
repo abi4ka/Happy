@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cn0jxdh68opny"]
 
 [ext_resource type="Script" uid="uid://cyrg1qm0y0b2q" path="res://scripts/PauseManager.gd" id="1_05uyy"]
-[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://FreePixel.ttf" id="2_p81d2"]
+[ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://assets/FreePixel.ttf" id="2_p81d2"]
 
 [node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "resume_button", "retry_button", "mainmenu_button")]
 script = ExtResource("1_05uyy")
