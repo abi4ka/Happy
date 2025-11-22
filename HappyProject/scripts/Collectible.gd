@@ -3,6 +3,7 @@ extends Area2D
 signal collected
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var s_collect = $CollectSound
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
@@ -12,5 +13,16 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
+		s_collect.pitch_scale = randf_range(0.7, 1.2)
+		s_collect.play()
+
 		emit_signal("collected", body)
-		queue_free()
+
+		call_deferred("_after_collect")
+
+func _after_collect():
+	visible = false
+	$CollisionShape2D.disabled = true
+
+	await get_tree().create_timer(s_collect.stream.get_length()).timeout
+	queue_free()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://mgbumprcwhpt"]
+[gd_scene load_steps=12 format=3 uid="uid://mgbumprcwhpt"]
 
 [ext_resource type="Script" uid="uid://oqlk2a5pwwqo" path="res://scripts/Collectible.gd" id="1_0t63x"]
 [ext_resource type="Texture2D" uid="uid://bomucl4gqreiq" path="res://assets/coin.png" id="2_v7riw"]
+[ext_resource type="AudioStream" uid="uid://dffnjh5w8hjq3" path="res://audio/coin.wav" id="3_ab8qe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdq0q"]
 size = Vector2(16, 16)
@@ -65,3 +66,7 @@ shape = SubResource("RectangleShape2D_pdq0q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w14il")
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ab8qe")
+volume_db = -15.0
