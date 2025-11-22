@@ -9,6 +9,10 @@ extends CharacterBody2D
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
+@onready var s_walk = $AudioWalk
+
+var walk_sound_delay := 0.5
+var walk_sound_timer := 0.0
 
 var just_pressed_interact := false
 var interact_cooldown := 0.3
@@ -48,6 +52,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(jump_action) and is_on_floor():
 		velocity.y = -jump_force
 
+		s_walk.pitch_scale = 1.3
+		s_walk.play()
+
 	move_and_slide()
 	_push_bodies()
 
@@ -66,6 +73,15 @@ func _physics_process(delta: float) -> void:
 		anim.flip_h = direction < 0
 	else:
 		anim.play("idle")
+		
+	if direction != 0 and is_on_floor():
+		walk_sound_timer -= delta
+		if walk_sound_timer <= 0.0:
+			s_walk.pitch_scale = randf_range(0.7, 0.9)
+			s_walk.play()
+			walk_sound_timer = walk_sound_delay
+	else:
+		walk_sound_timer = 0.0
 
 func _on_animation_finished():
 	if anim.animation == "push":

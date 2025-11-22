@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://b73nevepusppb"]
+[gd_scene load_steps=36 format=3 uid="uid://b73nevepusppb"]
 
 [ext_resource type="Script" uid="uid://bhlyf5gyepo1g" path="res://scripts/Player.gd" id="1_8xjnt"]
 [ext_resource type="Texture2D" uid="uid://bktxy453by217" path="res://assets/RedPanda2.png" id="2_ufh5k"]
+[ext_resource type="AudioStream" uid="uid://b14x5u2smdkdo" path="res://audio/walk.mp3" id="3_11gfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn5ey"]
 size = Vector2(14, 7)
@@ -257,3 +258,8 @@ texture_filter = 1
 position = Vector2(-2, -12)
 sprite_frames = SubResource("SpriteFrames_0lcl8")
 animation = &"idle"
+
+[node name="AudioWalk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_11gfl")
+volume_db = -15.0
+pitch_scale = 0.7
