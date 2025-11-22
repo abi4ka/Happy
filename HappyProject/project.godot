@@ -22,6 +22,11 @@ PlayersLoader="*res://scripts/PlayersLoader.gd"
 ServerSync="*res://scripts/ServerSync.gd"
 SettingsData="*res://scripts/SettingsData.gd"
 
+[display]
+
+window/size/mode=3
+window/vsync/vsync_mode=2
+
 [global_group]
 
 box=""

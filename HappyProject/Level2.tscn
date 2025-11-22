@@ -12,11 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://cy70xvng3xjcw" path="res://assets/hedgehog.png" id="7_6faey"]
 [ext_resource type="Script" uid="uid://dccvrofomgjyg" path="res://scripts/Enemy.gd" id="7_nc7oo"]
 [ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://prefabs/button.tscn" id="9_46pvi"]
-[ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://prefabs/platform.tscn" id="10_fvkd4"]
+[ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://prefabs/PlatformH2.tscn" id="10_fvkd4"]
 [ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="10_jw1dd"]
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://assets/FreePixel.ttf" id="11_0xt02"]
-[ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://prefabs/platformR.tscn" id="11_pj4lr"]
-[ext_resource type="PackedScene" uid="uid://ch5vgn6n5mn8m" path="res://prefabs/platformV.tscn" id="12_pj4lr"]
+[ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://prefabs/PlatformH2R.tscn" id="11_pj4lr"]
+[ext_resource type="PackedScene" uid="uid://ch5vgn6n5mn8m" path="res://prefabs/PlatformV4.tscn" id="12_pj4lr"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://prefabs/box.tscn" id="13_00xh1"]
 [ext_resource type="PackedScene" uid="uid://mgbumprcwhpt" path="res://prefabs/coin.tscn" id="14_00xh1"]
 
@@ -62,7 +62,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 agent_radius = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nc7oo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nwnlh"]
 texture = ExtResource("4_6faey")
 0:0/0 = 0
 1:0/0 = 0
@@ -272,7 +272,7 @@ texture = ExtResource("4_6faey")
 [sub_resource type="TileSet" id="TileSet_6x3wt"]
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
-sources/3 = SubResource("TileSetAtlasSource_nc7oo")
+sources/3 = SubResource("TileSetAtlasSource_nwnlh")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nc7oo"]
 size = Vector2(17, 10)
