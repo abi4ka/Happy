@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Happy"
-run/main_scene="uid://b6xc2sbriy0qx"
+run/main_scene="uid://xynq5he18fh6"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [autoload]
