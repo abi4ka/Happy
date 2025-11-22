@@ -8,6 +8,8 @@ extends Control
 
 @onready var name_input = $SettingsPanel/VBoxContainer/HBoxContainer/NameInput
 @onready var fullscreen_button = $SettingsPanel/VBoxContainer/HBoxContainer2/FullscreenButton
+@onready var volume_slider = $SettingsPanel/VBoxContainer/HBoxContainer3/VolumeSlider
+@onready var volume_value_label = $SettingsPanel/VBoxContainer/HBoxContainer3/VolumeValueLabel
 var toggle_panels: Array[Control]
 
 func _ready():
@@ -31,12 +33,21 @@ func _ready():
 	$SettingsPanel/VBoxContainer/HBoxContainer/Apply.pressed.connect(_on_apply_name_pressed)
 	
 	$LevelsPanel/VBoxContainer/ButtonLvl1.pressed.connect(_on_lvl1_pressed)
-	$LevelsPanel/VBoxContainer/ButtonLvl2.pressed.connect(_on_lvl1_pressed)
+	$LevelsPanel/VBoxContainer/ButtonLvl2.pressed.connect(_on_lvl2_pressed)
 	
 	fullscreen_button.pressed.connect(_on_fullscreen_toggled)
+	
+	SettingsData.load()
+	if SettingsData.fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	_update_fullscreen_text()
-
+	volume_slider.value = SettingsData.music_volume
+	volume_slider.value_changed.connect(_on_volume_changed)
+	_update_volume_label()
 	name_label.text = PlayerData.player_name
+
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -82,16 +93,17 @@ func _on_lvl2_pressed():
 	get_tree().change_scene_to_file("res://Level2.tscn")
 	
 func _on_fullscreen_toggled():
-
 	var is_fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 
 	if is_fullscreen:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		SettingsData.fullscreen = false
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		SettingsData.fullscreen = true
 
+	SettingsData.save()
 	_update_fullscreen_text()
-
 
 func _update_fullscreen_text():
 	var is_fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
@@ -99,3 +111,11 @@ func _update_fullscreen_text():
 		fullscreen_button.text = "ON"
 	else:
 		fullscreen_button.text = "OFF"
+		
+func _on_volume_changed(value):
+	SettingsData.music_volume = int(value)
+	SettingsData.save()
+	_update_volume_label()
+
+func _update_volume_label():
+	volume_value_label.text = str(SettingsData.music_volume) + "%"

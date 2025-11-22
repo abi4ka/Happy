@@ -307,6 +307,27 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_l48gv")
 text = "OFF
 "
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/SettingsPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Music volume: "
+label_settings = SubResource("LabelSettings_mae5d")
+
+[node name="VolumeSlider" type="HSlider" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+step = 10.0
+value = 50.0
+
+[node name="VolumeValueLabel" type="Label" parent="Control/SettingsPanel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cqjrg")
+theme_override_font_sizes/font_size = 32
+text = "50%"
+
 [node name="Panel" type="Panel" parent="Control/SettingsPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
