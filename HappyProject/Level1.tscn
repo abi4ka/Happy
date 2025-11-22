@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=21 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://prefabs/player_1.tscn" id="2_1bjei"]
@@ -12,9 +12,10 @@
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://assets/FreePixel.ttf" id="12_wapi5"]
 [ext_resource type="PackedScene" uid="uid://boya426tynkqh" path="res://prefabs/ui_state.tscn" id="14_3gjqj"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://prefabs/box.tscn" id="14_a2cb0"]
-[ext_resource type="Script" uid="uid://dqn4pcogq407n" path="res://scripts/MusicBox.gd" id="15_3gjqj"]
+[ext_resource type="AudioStream" uid="uid://dpqyrt2t6q0ve" path="res://audio/track1.mp3" id="16_fjxbk"]
 [ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="16_g56ap"]
 [ext_resource type="PackedScene" uid="uid://cn0jxdh68opny" path="res://prefabs/pause_menu.tscn" id="16_na6ls"]
+[ext_resource type="Script" uid="uid://ds8aq34f55xgy" path="res://scripts/Music.gd" id="17_3jhf0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjxbk"]
 texture = ExtResource("6_5g1s2")
@@ -200,6 +201,11 @@ font = ExtResource("12_wapi5")
 
 [node name="Level1" type="Node2D"]
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_fjxbk")
+volume_db = -25.0
+script = ExtResource("17_3jhf0")
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
 zoom = Vector2(5, 5)
 script = ExtResource("1_dn5ey")
@@ -240,40 +246,8 @@ layer_3/name = "BackEnv"
 layer_3/z_index = -10
 layer_3/tile_data = PackedInt32Array(-786466, 720899, 2, -720930, 720899, 3, -655394, 720899, 4, -852001, 786435, 1, -786465, 786435, 2, -720929, 786435, 3, -655393, 786435, 4, -589857, 786435, 5, -524321, 786435, 6, -393249, 786435, 8, -917536, 851971, 0, -852000, 851971, 1, -786464, 851971, 2, -720928, 851971, 3, -655392, 851971, 4, -589856, 851971, 5, -524320, 851971, 6, -458784, 851971, 7, -393248, 851971, 8, -917535, 917507, 0, -851999, 917507, 1, -786463, 917507, 2, -720927, 917507, 3, -655391, 917507, 4, -589855, 917507, 5, -524319, 917507, 6, -458783, 917507, 7, -393247, 917507, 8, -917534, 983043, 0, -851998, 983043, 1, -786462, 983043, 2, -720926, 983043, 3, -655390, 983043, 4, -589854, 983043, 5, -524318, 983043, 6, -458782, 983043, 7, -393246, 983043, 8, -851997, 1048579, 1, -786461, 1048579, 2, -720925, 1048579, 3, -655389, 1048579, 4, -589853, 1048579, 5, -524317, 1048579, 6, -393245, 1048579, 8, -786460, 1114115, 2, -720924, 1114115, 3, -393244, 1114115, 8)
 
-[node name="Coin" parent="." instance=ExtResource("8_s3sxq")]
-position = Vector2(179, -18.999998)
-
-[node name="Coin2" parent="." instance=ExtResource("8_s3sxq")]
-position = Vector2(-220, -123)
-
-[node name="Coin3" parent="." instance=ExtResource("8_s3sxq")]
-position = Vector2(-512.00006, -137)
-
-[node name="Button" parent="." instance=ExtResource("7_mlbie")]
-
-[node name="Button2" parent="." instance=ExtResource("7_mlbie")]
-position = Vector2(-193, 16)
-
-[node name="Button3" parent="." instance=ExtResource("7_mlbie")]
-position = Vector2(-298, 16)
-
 [node name="Background" parent="." instance=ExtResource("8_a2cb0")]
 position = Vector2(0, 74)
-
-[node name="Platform" parent="." instance=ExtResource("11_5g1s2")]
-position = Vector2(-162, 47)
-move_distance = 20.0
-move_speed = 100.0
-
-[node name="Platform2" parent="." instance=ExtResource("11_5g1s2")]
-position = Vector2(-384, -6)
-move_distance = 20.0
-move_speed = 100.0
-
-[node name="Platform3" parent="." instance=ExtResource("12_3gjqj")]
-position = Vector2(-288, -39)
-move_distance = -25.0
-move_speed = 100.0
 
 [node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("ui", "pause_manager")]
 position = Vector2(-484, -125)
@@ -299,17 +273,49 @@ label_settings = SubResource("LabelSettings_g56ap")
 
 [node name="UIState" parent="." instance=ExtResource("14_3gjqj")]
 
-[node name="MusicManager" type="Node" parent="."]
-script = ExtResource("15_3gjqj")
+[node name="Buttons" type="Node" parent="."]
 
-[node name="Player" type="AudioStreamPlayer" parent="MusicManager"]
-volume_db = -25.0
+[node name="Button" parent="Buttons" instance=ExtResource("7_mlbie")]
 
-[connection signal="pressed" from="Button" to="Platform" method="button_pressed"]
-[connection signal="released" from="Button" to="Platform" method="button_released"]
-[connection signal="pressed" from="Button2" to="Platform" method="button_pressed"]
-[connection signal="released" from="Button2" to="Platform" method="button_released"]
-[connection signal="pressed" from="Button3" to="Platform2" method="button_pressed"]
-[connection signal="pressed" from="Button3" to="Platform3" method="button_pressed"]
-[connection signal="released" from="Button3" to="Platform2" method="button_released"]
-[connection signal="released" from="Button3" to="Platform3" method="button_released"]
+[node name="Button2" parent="Buttons" instance=ExtResource("7_mlbie")]
+position = Vector2(-193, 16)
+
+[node name="Button3" parent="Buttons" instance=ExtResource("7_mlbie")]
+position = Vector2(-298, 16)
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("11_5g1s2")]
+position = Vector2(-162, 47)
+move_distance = 20.0
+move_speed = 100.0
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("11_5g1s2")]
+position = Vector2(-384, -6)
+move_distance = 20.0
+move_speed = 100.0
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("12_3gjqj")]
+position = Vector2(-288, -39)
+move_distance = -25.0
+move_speed = 100.0
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("8_s3sxq")]
+position = Vector2(179, -18.999998)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("8_s3sxq")]
+position = Vector2(-220, -123)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("8_s3sxq")]
+position = Vector2(-512.00006, -137)
+
+[connection signal="pressed" from="Buttons/Button" to="Platforms/Platform" method="button_pressed"]
+[connection signal="released" from="Buttons/Button" to="Platforms/Platform" method="button_released"]
+[connection signal="pressed" from="Buttons/Button2" to="Platforms/Platform" method="button_pressed"]
+[connection signal="released" from="Buttons/Button2" to="Platforms/Platform" method="button_released"]
+[connection signal="pressed" from="Buttons/Button3" to="Platforms/Platform2" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button3" to="Platforms/Platform3" method="button_pressed"]
+[connection signal="released" from="Buttons/Button3" to="Platforms/Platform2" method="button_released"]
+[connection signal="released" from="Buttons/Button3" to="Platforms/Platform3" method="button_released"]

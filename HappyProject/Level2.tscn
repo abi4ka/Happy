@@ -1,6 +1,8 @@
-[gd_scene load_steps=48 format=3 uid="uid://bxl33iupghc8x"]
+[gd_scene load_steps=50 format=3 uid="uid://bxl33iupghc8x"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_ex07k"]
+[ext_resource type="AudioStream" uid="uid://dpdhgqlwiegch" path="res://audio/track2.mp3" id="1_nwnlh"]
+[ext_resource type="Script" uid="uid://ds8aq34f55xgy" path="res://scripts/Music.gd" id="2_e3avg"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://prefabs/player_1.tscn" id="2_psxy2"]
 [ext_resource type="PackedScene" uid="uid://b73nevepusppb" path="res://prefabs/player_2.tscn" id="3_wwdpc"]
 [ext_resource type="Texture2D" uid="uid://b86ummp180mvc" path="res://assets/tileSetMy.png" id="4_6faey"]
@@ -395,6 +397,11 @@ size = Vector2(160, 64)
 size = Vector2(224, 64)
 
 [node name="Level2" type="Node2D"]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_nwnlh")
+volume_db = -25.0
+script = ExtResource("2_e3avg")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
 zoom = Vector2(5, 5)
