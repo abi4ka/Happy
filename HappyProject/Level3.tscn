@@ -424,13 +424,15 @@ position = Vector2(201, -124)
 position = Vector2(-1, 6.5)
 shape = SubResource("RectangleShape2D_vje1a")
 
-[node name="Coin" parent="." instance=ExtResource("20_vje1a")]
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("20_vje1a")]
 position = Vector2(428, -257)
 
-[node name="Coin2" parent="." instance=ExtResource("20_vje1a")]
+[node name="Coin2" parent="Coins" instance=ExtResource("20_vje1a")]
 position = Vector2(30.000002, -161)
 
-[node name="Coin3" parent="." instance=ExtResource("20_vje1a")]
+[node name="Coin3" parent="Coins" instance=ExtResource("20_vje1a")]
 position = Vector2(89, -291)
 
 [connection signal="pressed" from="Buttons/Button" to="Platforms/Platform" method="button_pressed"]

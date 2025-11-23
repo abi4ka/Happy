@@ -170,3 +170,4 @@ func finish_level():
 		print(" → NO UPDATE: fewer coins.")
 	print("==========================================================")
 	PlayersLoader.send_player_to_server()
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
