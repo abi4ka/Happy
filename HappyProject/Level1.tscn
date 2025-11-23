@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b73nevepusppb" path="res://prefabs/player_2.tscn" id="3_5g1s2"]
 [ext_resource type="Texture2D" uid="uid://b86ummp180mvc" path="res://assets/tileSetMy.png" id="6_5g1s2"]
 [ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://prefabs/button.tscn" id="7_mlbie"]
-[ext_resource type="PackedScene" uid="uid://c6so6fcx41rb5" path="res://background.tscn" id="8_a2cb0"]
+[ext_resource type="PackedScene" uid="uid://c6so6fcx41rb5" path="res://prefabs/background.tscn" id="8_a2cb0"]
 [ext_resource type="PackedScene" uid="uid://mgbumprcwhpt" path="res://prefabs/coin.tscn" id="8_s3sxq"]
 [ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://prefabs/PlatformH2.tscn" id="11_5g1s2"]
 [ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://prefabs/PlatformH2R.tscn" id="12_3gjqj"]

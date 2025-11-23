@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b86ummp180mvc" path="res://assets/tileSetMy.png" id="4_6faey"]
 [ext_resource type="PackedScene" uid="uid://cn0jxdh68opny" path="res://prefabs/pause_menu.tscn" id="5_psxy2"]
 [ext_resource type="PackedScene" uid="uid://boya426tynkqh" path="res://prefabs/ui_state.tscn" id="6_0xt02"]
-[ext_resource type="PackedScene" uid="uid://c6so6fcx41rb5" path="res://background.tscn" id="6_wwdpc"]
+[ext_resource type="PackedScene" uid="uid://c6so6fcx41rb5" path="res://prefabs/background.tscn" id="6_wwdpc"]
 [ext_resource type="PackedScene" uid="uid://dbwexbtqmmdqy" path="res://prefabs/button.tscn" id="9_46pvi"]
 [ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://prefabs/PlatformH2.tscn" id="10_fvkd4"]
 [ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="10_jw1dd"]
