@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsuuky1xpohi"]
+
+[ext_resource type="Script" uid="uid://daput2oicnif" path="res://scripts/SpeedBoost.gd" id="1_w4qew"]
+[ext_resource type="Texture2D" uid="uid://lyoot834l7xp" path="res://assets/SpeedBoost.png" id="2_w4qew"]
+[ext_resource type="AudioStream" uid="uid://dffnjh5w8hjq3" path="res://audio/coin.wav" id="3_55ytf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdq0q"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_we56q"]
+atlas = ExtResource("2_w4qew")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw5xi"]
+atlas = ExtResource("2_w4qew")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75dl1"]
+atlas = ExtResource("2_w4qew")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi1mw"]
+atlas = ExtResource("2_w4qew")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvgtu"]
+atlas = ExtResource("2_w4qew")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehfrs"]
+atlas = ExtResource("2_w4qew")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w14il"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_we56q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw5xi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75dl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi1mw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvgtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehfrs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="Coin" type="Area2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_w4qew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pdq0q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w14il")
+frame_progress = 0.0026495687
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_55ytf")
+volume_db = -15.0

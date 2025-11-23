@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@export var speed: float = 75.0
 @export var jump_force: float = 250.0
 @export var move_left_action: String
 @export var move_right_action: String
@@ -18,6 +17,10 @@ var just_pressed_interact := false
 var interact_cooldown := 0.3
 var interact_timer := 0.0
 var is_pushing := false
+
+@export var speed := 75.0
+var speed_multiplier := 1.0
+var animation_speed_multiplier := 1.0
 
 func _ready():
 	add_to_group("player")
@@ -47,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		direction -= 1.0
 	if Input.is_action_pressed(move_right_action):
 		direction += 1.0
-	velocity.x = direction * speed
+	velocity.x = direction * speed * speed_multiplier
 
 	if Input.is_action_just_pressed(jump_action) and is_on_floor():
 		velocity.y = -jump_force
@@ -113,3 +116,10 @@ func die():
 
 func _restart_level():
 	get_tree().reload_current_scene()
+
+func apply_speed_boost(multiplier: float):
+	speed_multiplier = multiplier
+	animation_speed_multiplier = multiplier
+	walk_sound_delay = 0.25
+
+	anim.speed_scale = animation_speed_multiplier

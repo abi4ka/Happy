@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d26vjlytxkr5m"]
+[gd_scene load_steps=30 format=3 uid="uid://d26vjlytxkr5m"]
 
 [ext_resource type="AudioStream" uid="uid://dpdhgqlwiegch" path="res://audio/track2.mp3" id="1_ewulq"]
 [ext_resource type="Script" uid="uid://ds8aq34f55xgy" path="res://scripts/Music.gd" id="2_6vscs"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dgw4470808k85" path="res://prefabs/PlatformH2.tscn" id="15_gp5y5"]
 [ext_resource type="PackedScene" uid="uid://cxpdxrylvejsy" path="res://prefabs/PlatformH2R.tscn" id="16_kah4x"]
 [ext_resource type="PackedScene" uid="uid://ch5vgn6n5mn8m" path="res://prefabs/PlatformV4.tscn" id="17_8jspn"]
+[ext_resource type="PackedScene" uid="uid://bsuuky1xpohi" path="res://prefabs/speedBoost.tscn" id="18_80vsr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nc7oo"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -350,64 +351,71 @@ offset_bottom = -19.0
 label_settings = SubResource("LabelSettings_jr02t")
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" parent="." instance=ExtResource("12_6vscs")]
-position = Vector2(-97, -96)
+[node name="SpeedBoost" parent="." instance=ExtResource("18_80vsr")]
+position = Vector2(274, -185)
 
-[node name="Button2" parent="." instance=ExtResource("12_6vscs")]
-position = Vector2(129, -160)
+[node name="Platforms" type="Node" parent="."]
 
-[node name="Button3" parent="." instance=ExtResource("12_6vscs")]
-position = Vector2(113, -256)
-
-[node name="Platform" parent="." instance=ExtResource("13_otr1s")]
+[node name="Platform" parent="Platforms" instance=ExtResource("13_otr1s")]
 position = Vector2(-16, -104)
 move_distance = 32.0
 move_speed = 100.0
 
-[node name="Platform2" parent="." instance=ExtResource("14_bptnd")]
+[node name="Platform2" parent="Platforms" instance=ExtResource("14_bptnd")]
 position = Vector2(-26, -56)
 move_distance = 48.0
 move_speed = 100.0
 auto_move = true
 
-[node name="Platform3" parent="." instance=ExtResource("15_gp5y5")]
+[node name="Platform3" parent="Platforms" instance=ExtResource("15_gp5y5")]
 position = Vector2(-128, -136)
 move_distance = 32.0
 move_speed = 100.0
 
-[node name="Platform4" parent="." instance=ExtResource("15_gp5y5")]
+[node name="Platform4" parent="Platforms" instance=ExtResource("15_gp5y5")]
 position = Vector2(128, -152)
 move_distance = 32.0
 move_speed = 100.0
 
-[node name="Platform5" parent="." instance=ExtResource("16_kah4x")]
+[node name="Platform5" parent="Platforms" instance=ExtResource("16_kah4x")]
 position = Vector2(272, -152)
 move_distance = -32.0
 move_speed = 100.0
 
-[node name="Platform6" parent="." instance=ExtResource("17_8jspn")]
+[node name="Platform6" parent="Platforms" instance=ExtResource("17_8jspn")]
 position = Vector2(307, -192)
-rotation = 3.1415927
+rotation = -3.1415925
 move_distance = -32.0
 move_speed = 100.0
 horizontal_move = false
 
-[node name="Platform7" parent="." instance=ExtResource("17_8jspn")]
+[node name="Platform7" parent="Platforms" instance=ExtResource("17_8jspn")]
 position = Vector2(291, -288)
-rotation = 3.1415927
+rotation = -3.1415925
 move_distance = -32.0
 move_speed = 100.0
 horizontal_move = false
 
-[connection signal="pressed" from="Button" to="Platform" method="button_pressed"]
-[connection signal="released" from="Button" to="Platform" method="button_released"]
-[connection signal="pressed" from="Button2" to="Platform3" method="button_pressed"]
-[connection signal="pressed" from="Button2" to="Platform6" method="button_pressed"]
-[connection signal="released" from="Button2" to="Platform3" method="button_released"]
-[connection signal="released" from="Button2" to="Platform6" method="button_released"]
-[connection signal="pressed" from="Button3" to="Platform4" method="button_pressed"]
-[connection signal="pressed" from="Button3" to="Platform5" method="button_pressed"]
-[connection signal="pressed" from="Button3" to="Platform7" method="button_pressed"]
-[connection signal="released" from="Button3" to="Platform4" method="button_released"]
-[connection signal="released" from="Button3" to="Platform5" method="button_released"]
-[connection signal="released" from="Button3" to="Platform7" method="button_released"]
+[node name="Buttons" type="Node" parent="."]
+
+[node name="Button" parent="Buttons" instance=ExtResource("12_6vscs")]
+position = Vector2(-97, -96)
+
+[node name="Button2" parent="Buttons" instance=ExtResource("12_6vscs")]
+position = Vector2(129, -160)
+
+[node name="Button3" parent="Buttons" instance=ExtResource("12_6vscs")]
+position = Vector2(113, -256)
+
+[connection signal="pressed" from="Buttons/Button" to="Platforms/Platform" method="button_pressed"]
+[connection signal="released" from="Buttons/Button" to="Platforms/Platform" method="button_released"]
+[connection signal="pressed" from="Buttons/Button2" to="Platforms/Platform3" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button2" to="Platforms/Platform6" method="button_pressed"]
+[connection signal="released" from="Buttons/Button2" to="Platforms/Platform3" method="button_released"]
+[connection signal="released" from="Buttons/Button2" to="Platforms/Platform6" method="button_released"]
+[connection signal="pressed" from="Buttons/Button3" to="Platforms/Platform4" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button3" to="Platforms/Platform5" method="button_pressed"]
+[connection signal="pressed" from="Buttons/Button3" to="Platforms/Platform7" method="button_pressed"]
+[connection signal="released" from="Buttons/Button3" to="Platforms/Platform4" method="button_released"]
+[connection signal="released" from="Buttons/Button3" to="Platforms/Platform5" method="button_released"]
+[connection signal="released" from="Buttons/Button3" to="Platforms/Platform7" method="button_released"]

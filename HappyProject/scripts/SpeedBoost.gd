@@ -1,0 +1,27 @@
+extends Area2D
+
+@export var speed_multiplier := 2.0
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var s_collect = $CollectSound
+
+func _ready():
+	connect("body_entered", _on_body_entered)
+
+	if anim and anim.sprite_frames and anim.sprite_frames.has_animation("default"):
+		anim.play("default")
+
+func _on_body_entered(body):
+	if body.is_in_group("player"):
+		s_collect.pitch_scale = randf_range(0.8, 1.1)
+		s_collect.play()
+
+		body.apply_speed_boost(speed_multiplier)
+		call_deferred("_after_collect")
+
+func _after_collect():
+	visible = false
+	$CollisionShape2D.disabled = true
+
+	await get_tree().create_timer(s_collect.stream.get_length()).timeout
+	queue_free()
