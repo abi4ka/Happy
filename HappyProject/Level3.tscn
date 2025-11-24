@@ -338,7 +338,7 @@ layer_3/tile_data = PackedInt32Array(-1245154, 720899, 2, -1179618, 720899, 3, -
 [node name="FinishZone" type="Area2D" parent="." node_paths=PackedStringArray("ui", "pause_manager")]
 position = Vector2(545, -221)
 script = ExtResource("10_vje1a")
-level_id = 2
+level_id = 3
 ui = NodePath("../UIState")
 pause_manager = NodePath("../PauseMenu")
 

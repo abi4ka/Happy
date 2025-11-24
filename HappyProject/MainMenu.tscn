@@ -174,12 +174,6 @@ theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 64
 text = "3 lvl"
 
-[node name="ButtonLvl4" type="Button" parent="Control/LevelsPanel/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_cqjrg")
-theme_override_font_sizes/font_size = 64
-text = "4 lvl"
-
 [node name="Panel" type="Panel" parent="Control/LevelsPanel"]
 layout_mode = 2
 size_flags_horizontal = 0
