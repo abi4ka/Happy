@@ -5,6 +5,10 @@ extends CharacterBody2D
 
 @export var zones: Array[Area2D]
 
+signal final_attack
+
+@export var checkblock := false
+
 var doors := [
 	false, 
 	true, 
@@ -58,7 +62,7 @@ func _physics_process(delta):
 				if target.has_method("die"):
 					target.die()
 
-
+	_check_final_zone()
 	move_and_slide()
 
 func update_enemy_room():
@@ -93,7 +97,7 @@ func _can_reach_room(room_index: int) -> bool:
 		var door_index = i if step == 1 else i - 1
 
 		if door_index >= 0 and door_index < doors.size():
-			if not doors[door_index]:  # дверь закрыта
+			if not doors[door_index]:
 				return false
 
 		i += step
@@ -160,4 +164,30 @@ func close_doors(indices: Array) -> void:
 		var idx = int(raw)
 		if idx >= 0 and idx < doors.size():
 			doors[idx] = false
+	_check_for_chase()
+
+func _check_final_zone():
+	if !checkblock:
+		return
+	
+	var last_zone := zones.size() - 1
+
+	var count_players := 0
+	for body in zones[last_zone].get_overlapping_bodies():
+		if body.is_in_group("player"):
+			count_players += 1
+	
+	if count_players >= 2:
+		await get_tree().create_timer(1.0).timeout
+		_trigger_final_attack()
+
+func _trigger_final_attack():
+	for i in range(doors.size()):
+		doors[i] = true
+
+	var last_zone := zones.size() - 1
+	target = _get_player_in_room(last_zone)
+	emit_signal("final_attack")
+	_play_anim("attack")
+	await get_tree().create_timer(0.5).timeout
 	_check_for_chase()

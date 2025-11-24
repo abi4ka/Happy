@@ -348,6 +348,7 @@ layer_3/tile_data = PackedInt32Array(-589809, 720899, 2, -524273, 720899, 3, -45
 [node name="Enemy" parent="." node_paths=PackedStringArray("zones") instance=ExtResource("10_q0xi3")]
 position = Vector2(-248, -36)
 zones = [NodePath("../AgrArea/Area2D"), NodePath("../AgrArea/Area2D2"), NodePath("../AgrArea/Area2D3"), NodePath("../AgrArea/Area2D4"), NodePath("../AgrArea/Area2D5")]
+checkblock = true
 
 [node name="Box" parent="." instance=ExtResource("13_00xh1")]
 position = Vector2(-275, -139)
@@ -476,6 +477,9 @@ position = Vector2(-280, -190.99998)
 [node name="Coin3" parent="Coins" instance=ExtResource("14_00xh1")]
 position = Vector2(144, -110)
 
+[connection signal="final_attack" from="Enemy" to="Platforms/Platform4" method="force_open"]
+[connection signal="final_attack" from="Enemy" to="Platforms/Platform5" method="force_close"]
+[connection signal="final_attack" from="Enemy" to="Platforms/Platform6" method="force_close"]
 [connection signal="pressed" from="Buttons/Button" to="Platforms/Platform" method="button_pressed"]
 [connection signal="pressed" from="Buttons/Button" to="Platforms/Platform2" method="button_pressed"]
 [connection signal="released" from="Buttons/Button" to="Platforms/Platform" method="button_released"]

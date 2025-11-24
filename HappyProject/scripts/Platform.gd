@@ -5,6 +5,8 @@ extends Node2D
 @export var horizontal_move := true
 @export var auto_move := false
 
+@export var block := false
+
 var start_pos: Vector2
 var end_pos: Vector2
 var target_pos: Vector2
@@ -24,20 +26,23 @@ func _ready():
 
 
 func button_pressed():
-	if auto_move:
+	if auto_move or block:
 		return
 	hold_count += 1
 	update_target()
 
 
 func button_released():
-	if auto_move:
+	if auto_move or block:
 		return
 	hold_count = max(hold_count - 1, 0)
 	update_target()
 
 
 func update_target():
+	if block:
+		return
+
 	if hold_count > 0:
 		target_pos = end_pos
 	else:
@@ -70,3 +75,13 @@ func _auto_move(delta):
 			target_pos = end_pos
 		else:
 			target_pos = start_pos
+
+func force_open():
+	block = true
+	target_pos = end_pos
+	direction = (target_pos - position).normalized()
+	
+func force_close():
+	block = true
+	target_pos = start_pos
+	direction = (target_pos - position).normalized()
