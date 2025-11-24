@@ -2,7 +2,33 @@ extends Node
 
 const SERVER_UPLOAD_URL := "http://127.0.0.1:8000/upload_stats/"
 const SERVER_LEADERBOARD_URL := "http://127.0.0.1:8000/leaderboard/?id="
+const SERVER_COINPOS := "http://127.0.0.1:8000/coinpos/"
 const LOCAL_FILE := "user://players_data.json"
+
+signal coinpos_received(result_array)
+signal coinpos_failed
+
+func request_coin_positions(max_number: int, count: int) -> void:
+	var http := HTTPRequest.new()
+	add_child(http)
+
+	http.request_completed.connect(func(result, response_code, headers, body):
+		var text = body.get_string_from_utf8()
+		print("[COINPOS raw]: ", text)
+
+		if response_code == 200:
+			var parsed = JSON.parse_string(text)
+			if parsed and parsed.has("result"):
+				emit_signal("coinpos_received", parsed["result"])
+				return
+
+		emit_signal("coinpos_failed")
+	)
+
+	var url = SERVER_COINPOS + "?max=%d&count=%d" % [max_number, count]
+	http.request(url)
+
+
 
 func send_player_stats(player_data: Dictionary) -> void:
 	print("\n[SEND] Sending player data to server...")

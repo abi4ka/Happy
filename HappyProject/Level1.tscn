@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6xc2sbriy0qx"]
+[gd_scene load_steps=22 format=3 uid="uid://b6xc2sbriy0qx"]
 
 [ext_resource type="Script" uid="uid://c581pmj65pyly" path="res://scripts/CameraController.gd" id="1_dn5ey"]
 [ext_resource type="PackedScene" uid="uid://60dmt5p3m6ua" path="res://prefabs/player_1.tscn" id="2_1bjei"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://bs1l7kc6rllcm" path="res://assets/FreePixel.ttf" id="12_wapi5"]
 [ext_resource type="PackedScene" uid="uid://boya426tynkqh" path="res://prefabs/ui_state.tscn" id="14_3gjqj"]
 [ext_resource type="PackedScene" uid="uid://dcnlrw7i4xncj" path="res://prefabs/box.tscn" id="14_a2cb0"]
+[ext_resource type="Script" uid="uid://drwig5y1n1llb" path="res://scripts/CoinSpawner.gd" id="16_3jhf0"]
 [ext_resource type="AudioStream" uid="uid://dpqyrt2t6q0ve" path="res://audio/track1.mp3" id="16_fjxbk"]
 [ext_resource type="Script" uid="uid://dtarb576ta5yw" path="res://scripts/LevelController.gd" id="16_g56ap"]
 [ext_resource type="PackedScene" uid="uid://cn0jxdh68opny" path="res://prefabs/pause_menu.tscn" id="16_na6ls"]
@@ -300,7 +301,9 @@ position = Vector2(-288, -39)
 move_distance = -25.0
 move_speed = 100.0
 
-[node name="Coins" type="Node" parent="."]
+[node name="Coins" type="Node" parent="." node_paths=PackedStringArray("coins")]
+script = ExtResource("16_3jhf0")
+coins = [NodePath("Coin"), NodePath("Coin2"), NodePath("Coin3"), NodePath("Coin4"), NodePath("Coin5"), NodePath("Coin6"), NodePath("Coin7")]
 
 [node name="Coin" parent="Coins" instance=ExtResource("8_s3sxq")]
 position = Vector2(179, -18.999998)
@@ -310,6 +313,22 @@ position = Vector2(-220, -123)
 
 [node name="Coin3" parent="Coins" instance=ExtResource("8_s3sxq")]
 position = Vector2(-512.00006, -137)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("8_s3sxq")]
+visible = false
+position = Vector2(22.999985, -31)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("8_s3sxq")]
+visible = false
+position = Vector2(181.99998, 49.999992)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("8_s3sxq")]
+visible = false
+position = Vector2(-395.99997, -125)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("8_s3sxq")]
+visible = false
+position = Vector2(-335.00003, -16)
 
 [connection signal="pressed" from="Buttons/Button" to="Platforms/Platform" method="button_pressed"]
 [connection signal="released" from="Buttons/Button" to="Platforms/Platform" method="button_released"]

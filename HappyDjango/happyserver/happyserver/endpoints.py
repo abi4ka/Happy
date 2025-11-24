@@ -1,4 +1,9 @@
+import json
+import random
+
 from django.db.models import F
+from django.http import JsonResponse
+from django.views import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,6 +11,23 @@ from rest_framework import status
 from happyapp.models import Player, LevelStat
 from happyapp.serializers import PlayerSerializer
 
+class CoinPosView(View):
+    def get(self, request):
+        try:
+            max_number = int(request.GET.get("max"))
+            count = int(request.GET.get("count"))
+        except:
+            return JsonResponse({"error": "Invalid parameters"}, status=400)
+
+        if max_number < 1 or count < 1:
+            return JsonResponse({"error": "Numbers must be positive"}, status=400)
+
+        if count > max_number:
+            return JsonResponse({"error": "Count cannot exceed max"}, status=400)
+
+        result = random.sample(range(1, max_number + 1), count)
+
+        return JsonResponse({"result": result})
 
 class UploadStatsView(APIView):
     def post(self, request):
@@ -30,8 +52,6 @@ class UploadStatsView(APIView):
 
         print("Serializer invalid:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 
 class LeaderboardView(APIView):
     def get(self, request):

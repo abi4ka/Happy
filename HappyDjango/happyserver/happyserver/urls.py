@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from happyserver.endpoints import UploadStatsView, LeaderboardView
+from happyserver.endpoints import UploadStatsView, LeaderboardView, CoinPosView
 
 urlpatterns = [
     path('upload_stats/', UploadStatsView.as_view(), name='upload_stats'),
     path('leaderboard/', LeaderboardView.as_view(), name='leaderboard'),
+    path('coinpos/', CoinPosView.as_view(), name='coinpos'),
 ]
