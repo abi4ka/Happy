@@ -25,7 +25,7 @@ var animation_speed_multiplier := 1.0
 func _ready():
 	add_to_group("player")
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
-
+	
 func _physics_process(delta: float) -> void:
 	if GameState.is_paused:
 		velocity = Vector2.ZERO

@@ -12,6 +12,8 @@ func _ready():
 		anim.play("default")
 
 func _on_body_entered(body):
+	if not visible:
+		return
 	if body.is_in_group("player"):
 		s_collect.pitch_scale = randf_range(0.7, 1.2)
 		s_collect.play()
